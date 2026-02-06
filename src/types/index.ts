@@ -101,6 +101,60 @@ export interface BeerSimilarity {
   };
 }
 
+export interface Author {
+  id: string;
+  name: string;
+  bio: string;
+  avatar_url: string | null;
+  role: string;
+}
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  category: 'news' | 'reviews' | 'culture' | 'events' | 'opinion' | 'industry';
+  featured_image: string | null;
+  tags: string[];
+  author_id: string;
+  read_time: number;
+  published_at: string;
+  updated_at: string;
+}
+
+export interface PintSizedPost {
+  id: string;
+  fact: string;
+  source?: string;
+  category: 'history' | 'science' | 'culture' | 'stats' | 'did-you-know';
+  icon?: string;
+  created_at: string;
+}
+
+export interface BeerNews {
+  id: string;
+  headline: string;
+  summary: string;
+  category: 'opening' | 'closing' | 'new-release' | 'seasonal' | 'event' | 'industry' | 'award';
+  source?: string;
+  source_url?: string;
+  location?: string;
+  published_at: string;
+  icon?: string;
+}
+
+export interface Video {
+  id: string;
+  title: string;
+  youtube_id: string;
+  channel: string;
+  description: string;
+  category: 'review' | 'education' | 'brewery-tour' | 'homebrew' | 'culture';
+  duration?: string;
+}
+
 export interface SearchFilters {
   q?: string;
   style?: string;

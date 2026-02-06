@@ -18,7 +18,10 @@ import {
   Leaf,
   Flame,
   Droplets,
-  Star
+  Star,
+  Newspaper,
+  Lightbulb,
+  Pen
 } from 'lucide-react';
 
 interface MenuSection {
@@ -185,6 +188,37 @@ const menuItems: MenuItem[] = [
       },
     ],
   },
+  {
+    label: 'Beer FYI',
+    href: '/beer-fyi',
+    icon: <Newspaper className="w-4 h-4" />,
+    megaMenu: [
+      {
+        title: 'Latest Articles',
+        links: [
+          { href: '/beer-fyi/rise-of-craft-lagers', label: 'Craft Lagers Rising', description: 'Industry trends', icon: <TrendingUp className="w-4 h-4" /> },
+          { href: '/beer-fyi/home-brewing-getting-started', label: 'Home Brewing 101', description: 'Getting started guide', icon: <Pen className="w-4 h-4" /> },
+          { href: '/beer-fyi/best-beer-festivals-2025', label: 'Beer Festivals 2025', description: 'Events worth attending', icon: <Star className="w-4 h-4" /> },
+          { href: '/beer-fyi', label: 'All Articles', description: 'Browse all posts', icon: <Newspaper className="w-4 h-4" /> },
+        ],
+      },
+      {
+        title: 'Categories',
+        links: [
+          { href: '/beer-fyi?category=reviews', label: 'Reviews', description: 'Beer reviews & comparisons' },
+          { href: '/beer-fyi?category=culture', label: 'Culture', description: 'Beer culture & lifestyle' },
+          { href: '/beer-fyi?category=industry', label: 'Industry', description: 'Trends & news' },
+          { href: '/beer-fyi?category=events', label: 'Events', description: 'Festivals & happenings' },
+        ],
+      },
+      {
+        title: 'Quick Reads',
+        links: [
+          { href: '/pint-sized-posts', label: 'Pint-Sized Posts', description: 'Quick beer facts', icon: <Lightbulb className="w-4 h-4" />, badge: 'Fun' },
+        ],
+      },
+    ],
+  },
 ];
 
 export default function MegaMenu() {
@@ -222,7 +256,7 @@ export default function MegaMenu() {
     <nav ref={menuRef} className="relative">
       {/* Mobile menu button */}
       <button
-        className="lg:hidden p-2 rounded-lg hover:bg-amber-100 dark:hover:bg-brown-800"
+        className="lg:hidden p-2 rounded-lg hover:bg-amber-100 dark:hover:bg-dark-elevated"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -245,7 +279,7 @@ export default function MegaMenu() {
           >
             <Link
               href={item.href}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg text-brown-700 dark:text-amber-100 hover:bg-amber-100 dark:hover:bg-brown-800 transition-colors font-medium"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-brown-700 dark:text-stone-200 hover:bg-amber-100 dark:hover:bg-dark-elevated transition-colors font-medium"
             >
               {item.icon}
               {item.label}
@@ -257,11 +291,11 @@ export default function MegaMenu() {
             {/* Mega menu dropdown */}
             {item.megaMenu && activeMenu === item.label && (
               <div className="absolute top-full left-0 pt-2 z-50 animate-slide-down">
-                <div className="bg-white dark:bg-brown-900 rounded-xl shadow-2xl border border-amber-200 dark:border-brown-700 p-6 min-w-[600px]">
+                <div className="bg-white dark:bg-dark-surface rounded-xl shadow-2xl border border-amber-200 dark:border-dark-border p-6 min-w-[600px]">
                   <div className="grid grid-cols-3 gap-6">
                     {item.megaMenu.map((section) => (
                       <div key={section.title}>
-                        <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wider mb-3">
+                        <h3 className="text-sm font-semibold text-amber-700 dark:text-neon-orange uppercase tracking-wider mb-3">
                           {section.title}
                         </h3>
                         <ul className="space-y-2">
@@ -269,16 +303,16 @@ export default function MegaMenu() {
                             <li key={link.href}>
                               <Link
                                 href={link.href}
-                                className="group flex items-start gap-3 p-2 rounded-lg hover:bg-amber-50 dark:hover:bg-brown-800 transition-colors"
+                                className="group flex items-start gap-3 p-2 rounded-lg hover:bg-amber-50 dark:hover:bg-dark-elevated transition-colors"
                               >
                                 {link.icon && (
-                                  <span className="text-amber-600 dark:text-amber-400 mt-0.5">
+                                  <span className="text-amber-600 dark:text-neon-orange mt-0.5">
                                     {link.icon}
                                   </span>
                                 )}
                                 <div className="flex-1">
                                   <div className="flex items-center gap-2">
-                                    <span className="font-medium text-brown-800 dark:text-amber-100 group-hover:text-amber-700 dark:group-hover:text-amber-300">
+                                    <span className="font-medium text-brown-800 dark:text-stone-200 group-hover:text-amber-700 dark:group-hover:text-neon-orange">
                                       {link.label}
                                     </span>
                                     {link.badge && (
@@ -288,7 +322,7 @@ export default function MegaMenu() {
                                     )}
                                   </div>
                                   {link.description && (
-                                    <p className="text-sm text-brown-500 dark:text-brown-400">
+                                    <p className="text-sm text-brown-500 dark:text-stone-500">
                                       {link.description}
                                     </p>
                                   )}
@@ -309,13 +343,13 @@ export default function MegaMenu() {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full right-0 mt-2 w-screen max-w-sm bg-white dark:bg-brown-900 rounded-xl shadow-2xl border border-amber-200 dark:border-brown-700 p-4 animate-slide-down z-50">
+        <div className="lg:hidden absolute top-full right-0 mt-2 w-screen max-w-sm bg-white dark:bg-dark-surface rounded-xl shadow-2xl border border-amber-200 dark:border-dark-border p-4 animate-slide-down z-50">
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className="flex items-center gap-3 p-3 rounded-lg text-brown-700 dark:text-amber-100 hover:bg-amber-100 dark:hover:bg-brown-800 transition-colors font-medium"
+                  className="flex items-center gap-3 p-3 rounded-lg text-brown-700 dark:text-stone-200 hover:bg-amber-100 dark:hover:bg-dark-elevated transition-colors font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.icon}

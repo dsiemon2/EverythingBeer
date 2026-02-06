@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, User, Heart, X } from 'lucide-react';
+import { Search, CircleUserRound, X, Facebook, Youtube, Instagram, Twitter } from 'lucide-react';
 import Logo from './Logo';
 import MegaMenu from './MegaMenu';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -19,72 +20,96 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 glass">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Logo />
+      {/* Top Toolbar */}
+      <div className="bg-dark-base text-stone-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-9">
+            {/* Social Media Icons - Left */}
+            <div className="flex items-center gap-3">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-dark-muted hover:text-neon-blue transition-colors" aria-label="Facebook">
+                <Facebook className="w-3.5 h-3.5" />
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-dark-muted hover:text-neon-red transition-colors" aria-label="YouTube">
+                <Youtube className="w-3.5 h-3.5" />
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-dark-muted hover:text-neon-orange transition-colors" aria-label="Instagram">
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-dark-muted hover:text-neon-blue transition-colors" aria-label="Twitter">
+                <Twitter className="w-3.5 h-3.5" />
+              </a>
+            </div>
 
-          {/* Navigation */}
-          <div className="hidden lg:block">
-            <MegaMenu />
-          </div>
-
-          {/* Right side actions */}
-          <div className="flex items-center gap-2">
-            {/* Search */}
-            {isSearchOpen ? (
-              <form onSubmit={handleSearch} className="flex items-center">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search beers, breweries..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-64 pl-10 pr-4 py-2 rounded-full bg-white dark:bg-brown-800 border border-amber-300 dark:border-brown-600 focus:outline-none focus:ring-2 focus:ring-amber-500 text-brown-800 dark:text-amber-100 placeholder-brown-400"
-                    autoFocus
-                  />
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brown-400" />
-                </div>
+            {/* Search, Theme, Account - Right */}
+            <div className="flex items-center gap-1">
+              {/* Search */}
+              {isSearchOpen ? (
+                <form onSubmit={handleSearch} className="flex items-center">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search beers, breweries..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-56 pl-8 pr-3 py-1 text-sm rounded-full bg-dark-elevated border border-dark-border focus:outline-none focus:ring-2 focus:ring-neon-orange text-stone-200 placeholder-dark-muted"
+                      autoFocus
+                    />
+                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-dark-muted" />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSearchOpen(false);
+                      setSearchQuery('');
+                    }}
+                    className="ml-1 p-1 rounded-full hover:bg-dark-elevated transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5 text-dark-muted" />
+                  </button>
+                </form>
+              ) : (
                 <button
-                  type="button"
-                  onClick={() => {
-                    setIsSearchOpen(false);
-                    setSearchQuery('');
-                  }}
-                  className="ml-2 p-2 rounded-full hover:bg-amber-100 dark:hover:bg-brown-800"
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-1.5 rounded-full hover:bg-dark-elevated transition-colors"
+                  aria-label="Search"
                 >
-                  <X className="w-5 h-5 text-brown-600 dark:text-amber-200" />
+                  <Search className="w-3.5 h-3.5 text-dark-muted hover:text-neon-orange" />
                 </button>
-              </form>
-            ) : (
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="p-2 rounded-full hover:bg-amber-100 dark:hover:bg-brown-800 transition-colors"
-                aria-label="Search"
+              )}
+
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
+              {/* Account */}
+              <Link
+                href="/login"
+                className="p-1.5 rounded-full hover:bg-dark-elevated transition-colors"
+                aria-label="Account"
               >
-                <Search className="w-5 h-5 text-brown-600 dark:text-amber-200" />
-              </button>
-            )}
+                <CircleUserRound className="w-3.5 h-3.5 text-dark-muted hover:text-neon-orange" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Favorites */}
-            <Link
-              href="/favorites"
-              className="hidden sm:flex p-2 rounded-full hover:bg-amber-100 dark:hover:bg-brown-800 transition-colors"
-              aria-label="Favorites"
-            >
-              <Heart className="w-5 h-5 text-brown-600 dark:text-amber-200" />
-            </Link>
+      {/* Centered Logo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center py-3">
+          <Logo size="lg" />
+        </div>
+      </div>
 
-            {/* User */}
-            <Link
-              href="/login"
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
-            >
-              <User className="w-4 h-4" />
-              Sign In
-            </Link>
+      {/* Navigation Bar */}
+      <div className="border-t border-amber-200/30 dark:border-dark-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center h-12">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:block">
+              <MegaMenu />
+            </div>
 
-            {/* Mobile menu */}
+            {/* Mobile: hamburger */}
             <div className="lg:hidden">
               <MegaMenu />
             </div>
@@ -93,7 +118,7 @@ export default function Header() {
       </div>
 
       {/* Search bar for mobile (expanded) */}
-      <div className="lg:hidden px-4 pb-4">
+      <div className="lg:hidden px-4 pb-3">
         <form onSubmit={handleSearch}>
           <div className="relative">
             <input
@@ -101,9 +126,9 @@ export default function Header() {
               placeholder="Search beers, breweries, styles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-brown-800 border border-amber-200 dark:border-brown-600 focus:outline-none focus:ring-2 focus:ring-amber-500 text-brown-800 dark:text-amber-100 placeholder-brown-400"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-dark-elevated border border-amber-200 dark:border-dark-border focus:outline-none focus:ring-2 focus:ring-neon-orange text-brown-800 dark:text-stone-200 placeholder-brown-400 dark:placeholder-dark-muted"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-brown-400 dark:text-dark-muted" />
           </div>
         </form>
       </div>

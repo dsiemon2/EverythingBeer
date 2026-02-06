@@ -201,6 +201,53 @@ export function getGuideImage(category: string, guideId: string): string {
   return guideImages[category] || guideImages.default;
 }
 
+// Blog post images by category
+export const blogImages: Record<string, string> = {
+  news: unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
+  reviews: unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+  culture: unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 600, 400),
+  events: unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
+  opinion: unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
+  industry: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
+  default: unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+};
+
+export function getBlogImage(category: string, postId: string): string {
+  const specificImages: Record<string, string> = {
+    'rise-of-craft-lagers': unsplashUrl(VERIFIED_BEER_PHOTOS.golden2, 600, 400),
+    'home-brewing-getting-started': unsplashUrl(VERIFIED_BEER_PHOTOS.amber3, 600, 400),
+    'best-beer-festivals-2025': unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
+    'ipa-vs-pale-ale-showdown': unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+  };
+
+  if (specificImages[postId]) {
+    return specificImages[postId];
+  }
+
+  return blogImages[category] || blogImages.default;
+}
+
+// News images by category
+export const newsImages: Record<string, string> = {
+  opening: unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
+  closing: unsplashUrl(VERIFIED_BEER_PHOTOS.dark1, 600, 400),
+  'new-release': unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+  seasonal: unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
+  event: unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 600, 400),
+  industry: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
+  award: unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
+  default: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
+};
+
+export function getNewsImage(category: string): string {
+  return newsImages[category] || newsImages.default;
+}
+
+// Hero featured image (large)
+export function getHeroImage(): string {
+  return unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 1200, 600);
+}
+
 // Style images by category
 export const styleImages: Record<string, string[]> = {
   'IPA': [

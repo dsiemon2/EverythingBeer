@@ -2,228 +2,517 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Beer, Building2, Layers, GitCompare, BookOpen, Search, ArrowRight, Star, TrendingUp, Sparkles } from 'lucide-react';
-import BeerCard from '@/components/BeerCard';
-import { beers } from '@/data/beers';
+import {
+  ArrowRight,
+  Lightbulb,
+  BookOpen,
+  Clock,
+  MapPin,
+  Play,
+  Beer,
+  Building2,
+  Layers,
+  GitCompare,
+  ChevronRight,
+  Zap,
+  TrendingUp,
+  Star,
+} from 'lucide-react';
+import { blogPosts } from '@/data/blog';
+import { pintSizedPosts } from '@/data/pint-sized-posts';
+import { beerNews, getNewsCategoryLabel } from '@/data/beer-news';
+import { videos } from '@/data/videos';
 import { guides } from '@/data/guides';
-import { getGuideImage } from '@/lib/images';
-
-const features = [
-  {
-    icon: <Beer className="w-8 h-8" />,
-    title: 'Discover Beers',
-    description: 'Explore our database of craft and commercial beers from around the world.',
-    href: '/beers',
-    color: 'bg-amber-500',
-  },
-  {
-    icon: <Building2 className="w-8 h-8" />,
-    title: 'Find Breweries',
-    description: 'Discover breweries near you and explore their flagship offerings.',
-    href: '/breweries',
-    color: 'bg-orange-500',
-  },
-  {
-    icon: <Layers className="w-8 h-8" />,
-    title: 'Learn Styles',
-    description: 'Understand the differences between 90+ beer styles with our comprehensive guides.',
-    href: '/styles',
-    color: 'bg-yellow-500',
-  },
-  {
-    icon: <GitCompare className="w-8 h-8" />,
-    title: 'Compare Beers',
-    description: 'Side-by-side comparisons to help you find your next favorite beer.',
-    href: '/compare',
-    color: 'bg-green-500',
-  },
-];
+import { getBlogImage, getNewsImage } from '@/lib/images';
+import { getAuthorById } from '@/data/authors';
 
 export default function Home() {
-  const featuredBeers = beers.slice(0, 4);
-  const trendingBeers = beers.filter(b => b.is_craft).slice(0, 4);
+  const featuredArticle = blogPosts[0];
+  const sidebarArticles = blogPosts.slice(1, 4);
+  const latestNews = beerNews.slice(0, 6);
+  const randomFacts = pintSizedPosts.slice(0, 6);
+  const featuredVideos = videos.slice(0, 4);
   const featuredGuides = guides.slice(0, 3);
+  const featuredAuthor = featuredArticle ? getAuthorById(featuredArticle.author_id) : null;
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-amber-100 to-orange-100 dark:from-brown-900 dark:via-brown-800 dark:to-amber-900">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-700 dark:text-amber-300 text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              Your Ultimate Beer Companion
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-brown-900 dark:text-amber-50 mb-6">
-              Discover, Compare &<br />
-              <span className="gradient-text">Understand Beer</span>
-            </h1>
-            <p className="text-xl text-brown-600 dark:text-amber-200 max-w-2xl mx-auto mb-10">
-              From craft favorites to commercial classics, find your perfect pour with
-              structured comparisons and explainable recommendations.
-            </p>
-
-            {/* Search Bar */}
-            <div className="max-w-xl mx-auto">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search beers, breweries, or styles..."
-                  className="w-full pl-12 pr-4 py-4 text-lg rounded-2xl bg-white dark:bg-brown-800 border border-amber-200 dark:border-brown-600 shadow-lg focus:outline-none focus:ring-4 focus:ring-amber-500/20 text-brown-800 dark:text-amber-100 placeholder-brown-400"
-                />
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-brown-400" />
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors">
-                  Search
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex flex-wrap justify-center gap-8 mt-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400">500+</div>
-                <div className="text-sm text-brown-500 dark:text-brown-400">Beers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400">8,000+</div>
-                <div className="text-sm text-brown-500 dark:text-brown-400">Breweries</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400">90+</div>
-                <div className="text-sm text-brown-500 dark:text-brown-400">Styles</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-amber-600 dark:text-amber-400">50+</div>
-                <div className="text-sm text-brown-500 dark:text-brown-400">Comparisons</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Wave decoration */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor" className="text-background"/>
-          </svg>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brown-800 dark:text-amber-100 mb-4">
-              Everything You Need
-            </h2>
-            <p className="text-lg text-brown-600 dark:text-brown-300 max-w-2xl mx-auto">
-              Whether you're a craft beer enthusiast or just starting your journey,
-              we've got the tools to help you explore.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature) => (
-              <Link key={feature.title} href={feature.href}>
-                <div className="beer-card bg-white dark:bg-brown-800 rounded-2xl p-6 border border-amber-100 dark:border-brown-700 h-full">
-                  <div className={`inline-flex p-3 rounded-xl ${feature.color} text-white mb-4`}>
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-brown-800 dark:text-amber-100 mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-brown-600 dark:text-brown-300">
-                    {feature.description}
+      {/* ============================================ */}
+      {/* SECTION 1: Featured Article Hero             */}
+      {/* ============================================ */}
+      <section className="bg-dark-base">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 min-h-[420px]">
+            {/* Main Featured Article */}
+            <div className="lg:col-span-2 relative overflow-hidden">
+              <Image
+                src={getBlogImage(featuredArticle.category, featuredArticle.slug)}
+                alt={featuredArticle.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 66vw"
+                priority
+              />
+              <div className="hero-overlay absolute inset-0" />
+              <div className="relative z-10 flex flex-col justify-end h-full p-6 md:p-10">
+                <div className="max-w-xl">
+                  <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider bg-neon-red text-white rounded mb-4">
+                    {featuredArticle.category}
+                  </span>
+                  <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                    <Link href={`/beer-fyi/${featuredArticle.slug}`} className="hover:text-neon-orange transition-colors">
+                      {featuredArticle.title}
+                    </Link>
+                  </h1>
+                  <p className="text-stone-300 text-sm md:text-base mb-4 line-clamp-2">
+                    {featuredArticle.excerpt}
                   </p>
-                  <div className="flex items-center gap-2 mt-4 text-amber-600 dark:text-amber-400 font-medium">
-                    Explore <ArrowRight className="w-4 h-4" />
+                  <div className="flex items-center gap-4 text-sm text-stone-400">
+                    {featuredAuthor && <span>By {featuredAuthor.name}</span>}
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {featuredArticle.read_time} min read
+                    </span>
                   </div>
+                  <Link
+                    href={`/beer-fyi/${featuredArticle.slug}`}
+                    className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 bg-neon-red hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-sm"
+                  >
+                    Read Full Article <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
-              </Link>
-            ))}
+              </div>
+            </div>
+
+            {/* Sidebar Article Cards */}
+            <div className="hidden lg:flex flex-col">
+              {sidebarArticles.map((article) => (
+                <Link
+                  key={article.id}
+                  href={`/beer-fyi/${article.slug}`}
+                  className="relative flex-1 overflow-hidden group border-l border-b border-dark-border last:border-b-0"
+                >
+                  <Image
+                    src={getBlogImage(article.category, article.slug)}
+                    alt={article.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="relative z-10 flex flex-col justify-end h-full p-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-neon-orange mb-1">
+                      {article.category}
+                    </span>
+                    <h3 className="text-sm font-bold text-white leading-snug group-hover:text-neon-blue transition-colors">
+                      {article.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Neon gradient divider */}
+        <div className="neon-divider" />
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 2: Pint-Sized Posts Ticker            */}
+      {/* ============================================ */}
+      <section className="bg-dark-surface py-3 border-b border-dark-border overflow-hidden">
+        <div className="flex items-center">
+          <div className="flex-shrink-0 px-4 flex items-center gap-2 text-neon-orange font-bold text-sm uppercase tracking-wider border-r border-dark-border pr-4">
+            <Lightbulb className="w-4 h-4" />
+            <span className="hidden sm:inline">Quick Facts</span>
+          </div>
+          <div className="overflow-hidden flex-1">
+            <div className="animate-ticker flex whitespace-nowrap gap-12 pl-6">
+              {[...randomFacts, ...randomFacts].map((fact, i) => (
+                <span key={`${fact.id}-${i}`} className="text-sm text-stone-400 inline-flex items-center gap-2">
+                  <span>{fact.icon || '🍺'}</span>
+                  <span>{fact.fact}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Beers */}
-      <section className="py-20 bg-amber-50 dark:bg-brown-900">
+      {/* ============================================ */}
+      {/* SECTION 3: Main Content + Sidebar Layout      */}
+      {/* ============================================ */}
+      <section className="py-10 bg-background dark:bg-dark-base">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 text-sm font-medium mb-2">
-                <Star className="w-4 h-4" />
-                FEATURED
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            {/* ====== LEFT: Main Content (2/3) ====== */}
+            <div className="lg:col-span-2 space-y-12">
+
+              {/* --- Beer News / Breaking Taps --- */}
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1 h-8 bg-gradient-to-b from-neon-red to-neon-orange rounded-full" />
+                    <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100">
+                      Breaking Taps
+                    </h2>
+                  </div>
+                  <span className="text-xs font-medium uppercase tracking-wider text-neon-rust dark:text-neon-orange flex items-center gap-1">
+                    <Zap className="w-3.5 h-3.5" />
+                    Latest News
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {latestNews.map((news) => (
+                    <article
+                      key={news.id}
+                      className="flex gap-4 p-4 bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border hover:border-neon-orange/30 dark:hover:border-neon-orange/40 transition-colors group"
+                    >
+                      {/* News thumbnail */}
+                      <div className="hidden sm:block relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                        <Image
+                          src={getNewsImage(news.category)}
+                          alt={news.headline}
+                          fill
+                          className="object-cover"
+                          sizes="96px"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className={`badge-${news.category} inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white rounded`}>
+                            {getNewsCategoryLabel(news.category)}
+                          </span>
+                          {news.location && (
+                            <span className="text-xs text-brown-400 dark:text-dark-muted flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              {news.location}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="font-bold text-brown-800 dark:text-stone-100 group-hover:text-neon-rust dark:group-hover:text-neon-orange transition-colors text-sm md:text-base leading-snug">
+                          {news.headline}
+                        </h3>
+                        <p className="text-sm text-brown-500 dark:text-stone-400 mt-1 line-clamp-2">
+                          {news.summary}
+                        </p>
+                        <time className="text-xs text-brown-400 dark:text-dark-muted mt-2 block">
+                          {new Date(news.published_at).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })}
+                        </time>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
-              <h2 className="text-3xl font-bold text-brown-800 dark:text-amber-100">
-                Popular Beers
+
+              {/* --- Latest from Beer FYI --- */}
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1 h-8 bg-gradient-to-b from-neon-blue to-neon-orange rounded-full" />
+                    <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100">
+                      Latest from Beer FYI
+                    </h2>
+                  </div>
+                  <Link href="/beer-fyi" className="text-neon-rust dark:text-neon-blue hover:text-neon-red text-sm font-medium flex items-center gap-1 transition-colors">
+                    All Articles <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {blogPosts.slice(0, 4).map((post) => {
+                    const author = getAuthorById(post.author_id);
+                    return (
+                      <Link key={post.id} href={`/beer-fyi/${post.slug}`}>
+                        <article className="beer-card bg-white dark:bg-dark-surface rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border h-full">
+                          <div className="relative h-40 overflow-hidden">
+                            <Image
+                              src={getBlogImage(post.category, post.slug)}
+                              alt={post.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 640px) 100vw, 50vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                            <span className="absolute top-3 left-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-neon-red/90 text-white rounded">
+                              {post.category}
+                            </span>
+                          </div>
+                          <div className="p-4">
+                            <h3 className="font-bold text-brown-800 dark:text-stone-100 text-sm leading-snug mb-2">
+                              {post.title}
+                            </h3>
+                            <p className="text-xs text-brown-500 dark:text-stone-400 line-clamp-2 mb-3">
+                              {post.excerpt}
+                            </p>
+                            <div className="flex items-center justify-between text-xs text-brown-400 dark:text-dark-muted">
+                              {author && <span>{author.name}</span>}
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {post.read_time} min
+                              </span>
+                            </div>
+                          </div>
+                        </article>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* --- Guides --- */}
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1 h-8 bg-gradient-to-b from-neon-orange to-neon-rust rounded-full" />
+                    <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100">
+                      Beer Guides
+                    </h2>
+                  </div>
+                  <Link href="/guides" className="text-neon-rust dark:text-neon-blue hover:text-neon-red text-sm font-medium flex items-center gap-1 transition-colors">
+                    All Guides <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {featuredGuides.map((guide) => (
+                    <Link key={guide.id} href={`/guides/${guide.slug}`}>
+                      <article className="beer-card bg-white dark:bg-dark-surface rounded-xl p-4 border border-amber-100 dark:border-dark-border h-full">
+                        <div className="flex items-center gap-2 mb-3">
+                          <BookOpen className="w-5 h-5 text-neon-orange" />
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-neon-rust dark:text-neon-orange">
+                            {guide.category}
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-sm text-brown-800 dark:text-stone-100 mb-2 leading-snug">
+                          {guide.title}
+                        </h3>
+                        <p className="text-xs text-brown-500 dark:text-stone-400 line-clamp-2 mb-3">
+                          {guide.excerpt}
+                        </p>
+                        <span className="text-xs text-brown-400 dark:text-dark-muted flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {guide.read_time} min read
+                        </span>
+                      </article>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ====== RIGHT: Sidebar (1/3) ====== */}
+            <aside className="space-y-8">
+
+              {/* Pint-Sized Posts Sidebar */}
+              <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
+                <div className="bg-gradient-to-r from-neon-red via-neon-orange to-neon-rust px-4 py-3">
+                  <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4" />
+                    Pint-Sized Posts
+                  </h3>
+                </div>
+                <div className="divide-y divide-amber-100 dark:divide-dark-border">
+                  {randomFacts.slice(0, 4).map((fact) => (
+                    <div key={fact.id} className="p-4">
+                      <div className="flex items-start gap-3">
+                        <span className="text-xl flex-shrink-0">{fact.icon || '🍺'}</span>
+                        <p className="text-xs text-brown-700 dark:text-stone-300 leading-relaxed">
+                          {fact.fact}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="px-4 py-3 border-t border-amber-100 dark:border-dark-border">
+                  <Link
+                    href="/pint-sized-posts"
+                    className="text-xs font-medium text-neon-rust dark:text-neon-orange hover:text-neon-red flex items-center gap-1 transition-colors"
+                  >
+                    More Beer Facts <ChevronRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Quick Explore Tools */}
+              <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
+                <div className="bg-gradient-to-r from-neon-blue to-neon-blue/70 px-4 py-3">
+                  <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                    <Star className="w-4 h-4" />
+                    Explore
+                  </h3>
+                </div>
+                <div className="p-3 space-y-1">
+                  {[
+                    { icon: <Beer className="w-4 h-4" />, label: 'Discover Beers', href: '/beers', color: 'text-neon-orange' },
+                    { icon: <Building2 className="w-4 h-4" />, label: 'Find Breweries', href: '/breweries', color: 'text-neon-blue' },
+                    { icon: <Layers className="w-4 h-4" />, label: 'Beer Styles', href: '/styles', color: 'text-neon-red' },
+                    { icon: <GitCompare className="w-4 h-4" />, label: 'Compare Beers', href: '/compare', color: 'text-neon-rust' },
+                  ].map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-amber-50 dark:hover:bg-dark-elevated transition-colors group"
+                    >
+                      <span className={item.color}>{item.icon}</span>
+                      <span className="text-sm font-medium text-brown-700 dark:text-stone-200 group-hover:text-neon-rust dark:group-hover:text-neon-orange transition-colors">
+                        {item.label}
+                      </span>
+                      <ChevronRight className="w-3.5 h-3.5 text-brown-300 dark:text-dark-muted ml-auto" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mangy Dog Coffee Ad */}
+              <a
+                href="https://mangydogcoffee.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border hover:border-neon-orange/40 transition-colors group"
+              >
+                <Image
+                  src="/everythingbeer/images/mangy-dog-coffee.png"
+                  alt="Mangy Dog Coffee - Coffee With A Bite"
+                  width={300}
+                  height={300}
+                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+
+              {/* Newsletter Sidebar Widget */}
+              <div className="bg-dark-surface rounded-xl p-5 text-center border border-dark-border">
+                <h3 className="text-white font-bold text-sm mb-2">Stay Updated</h3>
+                <p className="text-stone-400 text-xs mb-4">
+                  Weekly beer recs, guides & news in your inbox.
+                </p>
+                <form className="space-y-2">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-dark-elevated border border-dark-border text-stone-200 placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-neon-orange"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full px-3 py-2 text-sm bg-gradient-to-r from-neon-red to-neon-orange hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-lg transition-all"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+                <p className="text-[10px] text-dark-muted mt-2">No spam. Must be 21+.</p>
+              </div>
+
+              {/* Second Ad Placeholder */}
+              <div className="ad-placeholder rounded-xl p-6 text-center">
+                <p className="text-brown-400 dark:text-dark-muted text-xs font-medium uppercase tracking-wider mb-2">
+                  Sponsored
+                </p>
+                <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-amber-100 dark:bg-dark-elevated flex items-center justify-center">
+                  <TrendingUp className="w-8 h-8 text-neon-blue" />
+                </div>
+                <p className="text-sm text-brown-500 dark:text-stone-500">
+                  Affiliate products & gear
+                </p>
+                <p className="text-[10px] text-brown-400 dark:text-dark-muted mt-1">
+                  300 &times; 600
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 4: Videos Row                         */}
+      {/* ============================================ */}
+      <section className="py-10 bg-dark-surface border-y border-dark-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-8 bg-gradient-to-b from-neon-red to-neon-blue rounded-full" />
+              <h2 className="text-2xl font-bold text-white">
+                Videos
               </h2>
             </div>
-            <Link href="/beers" className="hidden sm:flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
-              View All <ArrowRight className="w-4 h-4" />
-            </Link>
+            <span className="text-xs font-medium uppercase tracking-wider text-neon-blue flex items-center gap-1">
+              <Play className="w-3.5 h-3.5" />
+              Featured
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredBeers.map((beer) => (
-              <BeerCard key={beer.id} beer={beer} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {featuredVideos.map((video) => (
+              <a
+                key={video.id}
+                href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="video-thumb rounded-xl aspect-video bg-dark-elevated mb-3">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  {/* Play button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center z-10 opacity-80 group-hover:opacity-100 transition-opacity">
+                    <div className="w-12 h-12 bg-neon-red rounded-full flex items-center justify-center shadow-lg">
+                      <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                    </div>
+                  </div>
+                  {video.duration && (
+                    <span className="absolute bottom-2 right-2 z-10 px-2 py-0.5 bg-black/80 text-white text-[10px] font-medium rounded">
+                      {video.duration}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-sm font-bold text-stone-100 group-hover:text-neon-blue transition-colors leading-snug mb-1">
+                  {video.title}
+                </h3>
+                <p className="text-xs text-dark-muted">
+                  {video.channel}
+                </p>
+              </a>
             ))}
           </div>
-
-          <Link href="/beers" className="sm:hidden flex items-center justify-center gap-2 mt-6 text-amber-600 font-medium">
-            View All Beers <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
       </section>
 
-      {/* Trending Craft Beers */}
-      <section className="py-20 bg-background">
+      {/* ============================================ */}
+      {/* SECTION 5: Comparison CTA Banner              */}
+      {/* ============================================ */}
+      <section className="py-12 bg-gradient-to-r from-neon-rust via-neon-red to-neon-orange">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium mb-2">
-                <TrendingUp className="w-4 h-4" />
-                TRENDING
-              </div>
-              <h2 className="text-3xl font-bold text-brown-800 dark:text-amber-100">
-                Craft Favorites
-              </h2>
-            </div>
-            <Link href="/beers?is_craft=true" className="hidden sm:flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
-              View All <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingBeers.map((beer) => (
-              <BeerCard key={beer.id} beer={beer} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Comparison CTA */}
-      <section className="py-20 bg-gradient-to-br from-amber-500 to-orange-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">
                 Not Sure What to Try Next?
               </h2>
-              <p className="text-xl text-amber-100 max-w-xl">
+              <p className="text-white/80 max-w-lg">
                 Use our comparison tool to find beers similar to ones you love,
-                or discover new styles based on your taste preferences.
+                or take the quiz to discover new favorites.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/compare"
-                className="px-8 py-4 bg-white text-amber-600 font-bold rounded-xl hover:bg-amber-50 transition-colors text-center"
+                className="px-6 py-3 bg-white text-neon-rust font-bold rounded-xl hover:bg-amber-50 transition-colors text-center text-sm"
               >
                 Compare Beers
               </Link>
               <Link
                 href="/quiz"
-                className="px-8 py-4 bg-amber-600 text-white font-bold rounded-xl border-2 border-white hover:bg-amber-700 transition-colors text-center"
+                className="px-6 py-3 bg-white/10 text-white font-bold rounded-xl border-2 border-white/30 hover:bg-white/20 transition-colors text-center text-sm"
               >
                 Take the Quiz
               </Link>
@@ -232,86 +521,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Guides Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 text-sm font-medium mb-2">
-                <BookOpen className="w-4 h-4" />
-                LEARN
-              </div>
-              <h2 className="text-3xl font-bold text-brown-800 dark:text-amber-100">
-                Beer Guides
-              </h2>
-            </div>
-            <Link href="/guides" className="hidden sm:flex items-center gap-2 text-amber-600 hover:text-amber-700 font-medium">
-              All Guides <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredGuides.map((guide) => (
-              <Link key={guide.id} href={`/guides/${guide.slug}`}>
-                <div className="beer-card bg-white dark:bg-brown-800 rounded-2xl overflow-hidden border border-amber-100 dark:border-brown-700 h-full">
-                  <div className="h-40 relative overflow-hidden">
-                    <Image
-                      src={getGuideImage(guide.category, guide.slug)}
-                      alt={guide.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <BookOpen className="w-16 h-16 text-white/30" />
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <span className="inline-block px-2 py-1 text-xs font-semibold bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 rounded-full mb-3">
-                      {guide.category}
-                    </span>
-                    <h3 className="font-bold text-lg text-brown-800 dark:text-amber-100 mb-2">
-                      {guide.title}
-                    </h3>
-                    <p className="text-brown-600 dark:text-brown-300 text-sm line-clamp-2">
-                      {guide.excerpt}
-                    </p>
-                    <div className="flex items-center gap-2 mt-4 text-sm text-brown-400">
-                      <span>{guide.read_time} min read</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-20 bg-brown-900">
+      {/* ============================================ */}
+      {/* SECTION 6: Newsletter CTA                     */}
+      {/* ============================================ */}
+      <section className="py-16 bg-dark-surface border-t border-dark-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             Stay Updated
           </h2>
-          <p className="text-lg text-brown-300 mb-8">
+          <p className="text-stone-400 mb-6">
             Get weekly beer recommendations, new brewery spotlights, and exclusive guides
             delivered to your inbox.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg bg-brown-800 border border-brown-700 text-white placeholder-brown-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="flex-1 px-4 py-3 rounded-lg bg-dark-elevated border border-dark-border text-stone-200 placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-neon-orange"
             />
             <button
               type="submit"
-              className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors"
+              className="px-6 py-3 bg-gradient-to-r from-neon-red to-neon-orange hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-lg transition-all"
             >
               Subscribe
             </button>
           </form>
-          <p className="text-sm text-brown-500 mt-4">
+          <p className="text-xs text-dark-muted mt-3">
             No spam, unsubscribe anytime. Must be 21+.
           </p>
         </div>

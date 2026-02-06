@@ -23,7 +23,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <Logo showText={false} />
+            <Logo size="lg" />
           </div>
           <h1 className="text-3xl font-bold text-brown-800 dark:text-amber-100">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
