@@ -168,12 +168,11 @@ export default function Home() {
                 className="group"
               >
                 <div className="video-thumb rounded-xl aspect-video bg-dark-elevated mb-3">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={`https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`}
                     alt={video.title}
-                    fill
-                    className="object-cover rounded-xl"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="absolute inset-0 w-full h-full object-cover rounded-xl"
                   />
                   {/* Play button overlay */}
                   <div className="absolute inset-0 flex items-center justify-center z-10 opacity-80 group-hover:opacity-100 transition-opacity">
