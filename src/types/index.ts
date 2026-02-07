@@ -115,7 +115,7 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   content: string;
-  category: 'news' | 'reviews' | 'culture' | 'events' | 'opinion' | 'industry';
+  category: 'news' | 'reviews' | 'culture' | 'events' | 'opinion' | 'industry' | 'education';
   featured_image: string | null;
   tags: string[];
   author_id: string;

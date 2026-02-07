@@ -141,7 +141,66 @@ export default function Home() {
       </section>
 
       {/* ============================================ */}
-      {/* SECTION 3: Main Content + Sidebar Layout      */}
+      {/* SECTION 3: Videos Row (moved up)               */}
+      {/* ============================================ */}
+      <section className="py-10 bg-dark-surface border-y border-dark-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-8 bg-gradient-to-b from-neon-red to-neon-blue rounded-full" />
+              <h2 className="text-2xl font-bold text-white">
+                Videos
+              </h2>
+            </div>
+            <span className="text-xs font-medium uppercase tracking-wider text-neon-blue flex items-center gap-1">
+              <Play className="w-3.5 h-3.5" />
+              Featured
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {featuredVideos.map((video) => (
+              <a
+                key={video.id}
+                href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="video-thumb rounded-xl aspect-video bg-dark-elevated mb-3">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover rounded-xl"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  {/* Play button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center z-10 opacity-80 group-hover:opacity-100 transition-opacity">
+                    <div className="w-12 h-12 bg-neon-red rounded-full flex items-center justify-center shadow-lg">
+                      <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                    </div>
+                  </div>
+                  {video.duration && (
+                    <span className="absolute bottom-2 right-2 z-10 px-2 py-0.5 bg-black/80 text-white text-[10px] font-medium rounded">
+                      {video.duration}
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-sm font-bold text-stone-100 group-hover:text-neon-blue transition-colors leading-snug mb-1">
+                  {video.title}
+                </h3>
+                <p className="text-xs text-dark-muted">
+                  {video.channel}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* SECTION 4: Main Content + Sidebar Layout      */}
       {/* ============================================ */}
       <section className="py-10 bg-background dark:bg-dark-base">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -311,9 +370,31 @@ export default function Home() {
             {/* ====== RIGHT: Sidebar (1/3) ====== */}
             <aside className="space-y-8">
 
-              {/* Pint-Sized Posts Sidebar */}
+              {/* 1. Newsletter Sidebar Widget (Stay Updated) */}
+              <div className="bg-dark-surface rounded-xl p-5 text-center border border-dark-border">
+                <h3 className="text-white font-bold text-sm mb-2">Stay Updated</h3>
+                <p className="text-stone-400 text-xs mb-4">
+                  Weekly beer recs, guides & news in your inbox.
+                </p>
+                <form className="space-y-2">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-dark-elevated border border-dark-border text-stone-200 placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-neon-orange"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full px-3 py-2 text-sm bg-gradient-to-r from-neon-red to-neon-orange hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-lg transition-all"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+                <p className="text-[10px] text-dark-muted mt-2">No spam. Must be 21+.</p>
+              </div>
+
+              {/* 2. Pint-Sized Posts Sidebar */}
               <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
-                <div className="bg-gradient-to-r from-neon-red via-neon-orange to-neon-rust px-4 py-3">
+                <div className="bg-gradient-to-r from-neon-rust to-neon-orange px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
                     <Lightbulb className="w-4 h-4" />
                     Pint-Sized Posts
@@ -341,7 +422,39 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Quick Explore Tools */}
+              {/* 3. Mangy Dog Coffee Ad */}
+              <a
+                href="https://mangydogcoffee.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border hover:border-neon-orange/40 transition-colors group"
+              >
+                <Image
+                  src="/everythingbeer/images/mangy-dog-coffee.png"
+                  alt="Mangy Dog Coffee - Coffee With A Bite"
+                  width={300}
+                  height={300}
+                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+
+              {/* 4. Soup Cook Off Sponsor Ad */}
+              <a
+                href="https://soupcookoff.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border hover:border-neon-orange/40 transition-colors group"
+              >
+                <Image
+                  src="/everythingbeer/images/soup-cook-off.png"
+                  alt="Soup Cook Off"
+                  width={300}
+                  height={300}
+                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </a>
+
+              {/* 5. Quick Explore Tools (bottom) */}
               <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
                 <div className="bg-gradient-to-r from-neon-blue to-neon-blue/70 px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">
@@ -370,120 +483,7 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-
-              {/* Mangy Dog Coffee Ad */}
-              <a
-                href="https://mangydogcoffee.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border hover:border-neon-orange/40 transition-colors group"
-              >
-                <Image
-                  src="/everythingbeer/images/mangy-dog-coffee.png"
-                  alt="Mangy Dog Coffee - Coffee With A Bite"
-                  width={300}
-                  height={300}
-                  className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              </a>
-
-              {/* Newsletter Sidebar Widget */}
-              <div className="bg-dark-surface rounded-xl p-5 text-center border border-dark-border">
-                <h3 className="text-white font-bold text-sm mb-2">Stay Updated</h3>
-                <p className="text-stone-400 text-xs mb-4">
-                  Weekly beer recs, guides & news in your inbox.
-                </p>
-                <form className="space-y-2">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-dark-elevated border border-dark-border text-stone-200 placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-neon-orange"
-                  />
-                  <button
-                    type="submit"
-                    className="w-full px-3 py-2 text-sm bg-gradient-to-r from-neon-red to-neon-orange hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-lg transition-all"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-                <p className="text-[10px] text-dark-muted mt-2">No spam. Must be 21+.</p>
-              </div>
-
-              {/* Second Ad Placeholder */}
-              <div className="ad-placeholder rounded-xl p-6 text-center">
-                <p className="text-brown-400 dark:text-dark-muted text-xs font-medium uppercase tracking-wider mb-2">
-                  Sponsored
-                </p>
-                <div className="w-20 h-20 mx-auto mb-3 rounded-full bg-amber-100 dark:bg-dark-elevated flex items-center justify-center">
-                  <TrendingUp className="w-8 h-8 text-neon-blue" />
-                </div>
-                <p className="text-sm text-brown-500 dark:text-stone-500">
-                  Affiliate products & gear
-                </p>
-                <p className="text-[10px] text-brown-400 dark:text-dark-muted mt-1">
-                  300 &times; 600
-                </p>
-              </div>
             </aside>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* SECTION 4: Videos Row                         */}
-      {/* ============================================ */}
-      <section className="py-10 bg-dark-surface border-y border-dark-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-1 h-8 bg-gradient-to-b from-neon-red to-neon-blue rounded-full" />
-              <h2 className="text-2xl font-bold text-white">
-                Videos
-              </h2>
-            </div>
-            <span className="text-xs font-medium uppercase tracking-wider text-neon-blue flex items-center gap-1">
-              <Play className="w-3.5 h-3.5" />
-              Featured
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {featuredVideos.map((video) => (
-              <a
-                key={video.id}
-                href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
-              >
-                <div className="video-thumb rounded-xl aspect-video bg-dark-elevated mb-3">
-                  <Image
-                    src={`https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`}
-                    alt={video.title}
-                    fill
-                    className="object-cover rounded-xl"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center z-10 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <div className="w-12 h-12 bg-neon-red rounded-full flex items-center justify-center shadow-lg">
-                      <Play className="w-5 h-5 text-white fill-white ml-0.5" />
-                    </div>
-                  </div>
-                  {video.duration && (
-                    <span className="absolute bottom-2 right-2 z-10 px-2 py-0.5 bg-black/80 text-white text-[10px] font-medium rounded">
-                      {video.duration}
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-sm font-bold text-stone-100 group-hover:text-neon-blue transition-colors leading-snug mb-1">
-                  {video.title}
-                </h3>
-                <p className="text-xs text-dark-muted">
-                  {video.channel}
-                </p>
-              </a>
-            ))}
           </div>
         </div>
       </section>

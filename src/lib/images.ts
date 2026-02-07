@@ -1,91 +1,80 @@
-// Beer images from Unsplash (free to use)
-// All URLs verified working as of 2024
+// Beer images - local stock photos and AI-generated images
+// All images stored in public/images/stock/ and public/images/ai/
 
-// Verified working Unsplash beer photo IDs
-const VERIFIED_BEER_PHOTOS = {
-  // Light/golden beers
-  golden1: 'photo-1535958636474-b021ee887b13',
-  golden2: 'photo-1608270586620-248524c67de9',
-  golden3: 'photo-1558642452-9d2a7deb7f62',
-  golden4: 'photo-1600788886242-5c96aabe3757',
+const BASE = '/everythingbeer/images';
 
-  // Amber/copper beers
-  amber1: 'photo-1566633806327-68e152aaf26d',
-  amber2: 'photo-1571613316887-6f8d5cbf7ef7',
-  amber3: 'photo-1618885472179-5e474019f2a9',
-
-  // Dark beers
-  dark1: 'photo-1532634922-8fe0b757fb13',
-
-  // Pub/bar scenes
-  pub1: 'photo-1436076863939-06870fe779c2',
-  pub2: 'photo-1504502350688-00f5d59bbdeb',
-
-  // Food pairing
-  food1: 'photo-1414235077428-338989a2e8c0',
-  pizza1: 'photo-1565299624946-b28f40a0ae38',
-};
-
-function unsplashUrl(photoId: string, w: number = 400, h: number = 500): string {
-  return `https://images.unsplash.com/${photoId}?w=${w}&h=${h}&fit=crop`;
+// Helper to build local image paths
+function stockImg(filename: string): string {
+  return `${BASE}/stock/${filename}`;
 }
 
+function aiImg(filename: string): string {
+  return `${BASE}/ai/${filename}`;
+}
+
+function rootImg(filename: string): string {
+  return `${BASE}/${filename}`;
+}
+
+// ============================================================
+// Beer images by style category
+// ============================================================
 export const beerImages = {
   // Light lagers and pilsners
   light: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
+    stockImg('beer-1218742.jpg'),
+    stockImg('beer-203855.jpg'),
+    stockImg('beer-554619.jpg'),
+    stockImg('alcohol-21488.jpg'),
   ],
   // IPAs and pale ales (amber/gold)
   ipa: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber3),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.pub1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
+    stockImg('beer-2019929.jpg'),
+    stockImg('beer-1605826.jpg'),
+    stockImg('ale-2029499.png'),
+    stockImg('beer-2218900.jpg'),
+    stockImg('beer-1607001.jpg'),
   ],
   // Amber ales and lagers
   amber: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.pub2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2),
+    stockImg('alcohol-21938.jpg'),
+    stockImg('beer-2449887.jpg'),
+    stockImg('beer-3445988.jpg'),
+    stockImg('beer-428121.jpg'),
   ],
   // Dark beers (stouts, porters)
   dark: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.dark1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
+    stockImg('alcohol-3797764.jpg'),
+    stockImg('alcohol-3814913.jpg'),
+    stockImg('beer-3065711.jpg'),
+    stockImg('beer-3573276.jpg'),
   ],
   // Wheat beers
   wheat: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
+    stockImg('beer-1218742.jpg'),
+    stockImg('beer-554619.jpg'),
+    stockImg('beer-203855.jpg'),
   ],
   // Belgian ales
   belgian: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
+    stockImg('beer-2449887.jpg'),
+    stockImg('beer-2218900.jpg'),
+    stockImg('beer-428121.jpg'),
+    stockImg('beer-1605826.jpg'),
   ],
   // Sour beers
   sour: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.pub2),
+    stockImg('beer-1482748.png'),
+    stockImg('beer-1777934.png'),
+    stockImg('beer-203855.jpg'),
   ],
   // Default/generic
   default: [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber3),
+    stockImg('beer-2019929.jpg'),
+    stockImg('beer-1605826.jpg'),
+    stockImg('beer-3445988.jpg'),
+    stockImg('beer-554619.jpg'),
+    stockImg('beer-428121.jpg'),
   ],
 };
 
@@ -133,16 +122,16 @@ export function getBeerImage(styleId: string, beerId: string): string {
 
 // Specific beer images (for well-known beers we can match)
 export const specificBeerImages: Record<string, string> = {
-  'guinness-draught': unsplashUrl(VERIFIED_BEER_PHOTOS.dark1),
-  'bud-light': unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
-  'miller-lite': unsplashUrl(VERIFIED_BEER_PHOTOS.golden3),
-  'coors-light': unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-  'corona-extra': unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
-  'modelo-especial': unsplashUrl(VERIFIED_BEER_PHOTOS.golden4),
-  'heineken': unsplashUrl(VERIFIED_BEER_PHOTOS.golden2),
-  'stella-artois': unsplashUrl(VERIFIED_BEER_PHOTOS.amber2),
-  'blue-moon': unsplashUrl(VERIFIED_BEER_PHOTOS.golden3),
-  'budweiser': unsplashUrl(VERIFIED_BEER_PHOTOS.golden1),
+  'guinness-draught': stockImg('alcohol-3797764.jpg'),
+  'bud-light': stockImg('beer-203855.jpg'),
+  'miller-lite': stockImg('beer-554619.jpg'),
+  'coors-light': stockImg('beer-1218742.jpg'),
+  'corona-extra': stockImg('beer-1218742.jpg'),
+  'modelo-especial': stockImg('beer-203855.jpg'),
+  'heineken': stockImg('beer-554619.jpg'),
+  'stella-artois': stockImg('beer-2449887.jpg'),
+  'blue-moon': stockImg('beer-1482748.png'),
+  'budweiser': stockImg('beer-203855.jpg'),
 };
 
 // Get the best image for a specific beer
@@ -156,16 +145,18 @@ export function getBeerImageUrl(beerId: string, styleId: string): string {
   return getBeerImage(styleId, beerId);
 }
 
-// Brewery images - variety of brewery/bar scenes
+// ============================================================
+// Brewery images
+// ============================================================
 export const breweryImages = [
-  unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.dark1, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 400, 300),
-  unsplashUrl(VERIFIED_BEER_PHOTOS.golden2, 400, 300),
+  aiImg('brewery_1.jpg'),
+  aiImg('brewery_2.jpg'),
+  stockImg('buildings-1245953.jpg'),
+  stockImg('factory-1518504.jpg'),
+  stockImg('beer-barrel-956322.jpg'),
+  stockImg('beer-bottles-3151245.jpg'),
+  stockImg('beer-kegs_m1duPN-SBI-300617966.jpg'),
+  stockImg('brew-1031484.jpg'),
 ];
 
 export function getBreweryImage(breweryId: string): string {
@@ -173,25 +164,27 @@ export function getBreweryImage(breweryId: string): string {
   return breweryImages[hash % breweryImages.length];
 }
 
+// ============================================================
 // Guide images by category
+// ============================================================
 export const guideImages: Record<string, string> = {
-  education: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
-  pairing: unsplashUrl(VERIFIED_BEER_PHOTOS.food1, 600, 400),
-  seasonal: unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
-  comparison: unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
-  beginner: unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
-  default: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
+  education: stockImg('beer-2019929.jpg'),
+  pairing: stockImg('beer-3634581.jpg'),
+  seasonal: stockImg('beer-1218742.jpg'),
+  comparison: stockImg('beers-1283566.jpg'),
+  beginner: stockImg('beer-2449887.jpg'),
+  default: stockImg('beer-2019929.jpg'),
 };
 
 export function getGuideImage(category: string, guideId: string): string {
   // Specific guide images
   const specificImages: Record<string, string> = {
-    'beer-styles-explained': unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
-    'best-beers-for-beginners': unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
-    'beer-and-pizza-pairing': unsplashUrl(VERIFIED_BEER_PHOTOS.pizza1, 600, 400),
-    'understanding-abv-ibu-srm': unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
-    'summer-beers-guide': unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
-    'domestic-lagers-compared': unsplashUrl(VERIFIED_BEER_PHOTOS.golden2, 600, 400),
+    'beer-styles-explained': stockImg('beers-1283566.jpg'),
+    'best-beers-for-beginners': stockImg('beer-2449887.jpg'),
+    'beer-and-pizza-pairing': stockImg('beer-3634581.jpg'),
+    'understanding-abv-ibu-srm': stockImg('beer-2019929.jpg'),
+    'summer-beers-guide': stockImg('beer-1218742.jpg'),
+    'domestic-lagers-compared': stockImg('beer-203855.jpg'),
   };
 
   if (specificImages[guideId]) {
@@ -201,23 +194,28 @@ export function getGuideImage(category: string, guideId: string): string {
   return guideImages[category] || guideImages.default;
 }
 
+// ============================================================
 // Blog post images by category
+// ============================================================
 export const blogImages: Record<string, string> = {
-  news: unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
-  reviews: unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
-  culture: unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 600, 400),
-  events: unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
-  opinion: unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
-  industry: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
-  default: unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+  news: stockImg('beer-advertising-2712521.jpg'),
+  reviews: stockImg('beers-1283566.jpg'),
+  culture: stockImg('beer-3634581.jpg'),
+  events: stockImg('Oktoberfest Frauline.jpg'),
+  opinion: stockImg('beer-2449887.jpg'),
+  industry: stockImg('factory-1518504.jpg'),
+  education: stockImg('beer-2019929.jpg'),
+  default: stockImg('beer-2019929.jpg'),
 };
 
 export function getBlogImage(category: string, postId: string): string {
   const specificImages: Record<string, string> = {
-    'rise-of-craft-lagers': unsplashUrl(VERIFIED_BEER_PHOTOS.golden2, 600, 400),
-    'home-brewing-getting-started': unsplashUrl(VERIFIED_BEER_PHOTOS.amber3, 600, 400),
-    'best-beer-festivals-2025': unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
-    'ipa-vs-pale-ale-showdown': unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
+    'rise-of-craft-lagers': stockImg('beer-203855.jpg'),
+    'home-brewing-getting-started': stockImg('brew-1031484.jpg'),
+    'best-beer-festivals-2025': stockImg('Oktoberfest Frauline.jpg'),
+    'ipa-vs-pale-ale-showdown': stockImg('beers-1283566.jpg'),
+    'hops-the-flower-behind-the-flavor': stockImg('hops-1678583.jpg'),
+    'reinheitsgebot-german-purity-law': rootImg('reinheitsgebot.jpg'),
   };
 
   if (specificImages[postId]) {
@@ -227,70 +225,76 @@ export function getBlogImage(category: string, postId: string): string {
   return blogImages[category] || blogImages.default;
 }
 
+// ============================================================
 // News images by category
+// ============================================================
 export const newsImages: Record<string, string> = {
-  opening: unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 600, 400),
-  closing: unsplashUrl(VERIFIED_BEER_PHOTOS.dark1, 600, 400),
-  'new-release': unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 600, 400),
-  seasonal: unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 600, 400),
-  event: unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 600, 400),
-  industry: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
-  award: unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 600, 400),
-  default: unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 600, 400),
+  opening: aiImg('brewery_1.jpg'),
+  closing: stockImg('buildings-1245953.jpg'),
+  'new-release': stockImg('beer-bottles-3151245.jpg'),
+  seasonal: stockImg('beer-1218742.jpg'),
+  event: stockImg('Oktoberfest Frauline.jpg'),
+  industry: stockImg('factory-1518504.jpg'),
+  award: stockImg('beer-3445988.jpg'),
+  default: stockImg('beer-2019929.jpg'),
 };
 
 export function getNewsImage(category: string): string {
   return newsImages[category] || newsImages.default;
 }
 
+// ============================================================
 // Hero featured image (large)
+// ============================================================
 export function getHeroImage(): string {
-  return unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 1200, 600);
+  return rootImg('beer-site-background.jpg');
 }
 
+// ============================================================
 // Style images by category
+// ============================================================
 export const styleImages: Record<string, string[]> = {
   'IPA': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber3, 400, 300),
+    stockImg('beer-2019929.jpg'),
+    stockImg('beer-1605826.jpg'),
+    stockImg('ale-2029499.png'),
   ],
   'Pale Ale': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.pub1, 400, 300),
+    stockImg('beer-2218900.jpg'),
+    stockImg('beer-1607001.jpg'),
   ],
   'Lager': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 400, 300),
+    stockImg('beer-1218742.jpg'),
+    stockImg('beer-203855.jpg'),
+    stockImg('beer-554619.jpg'),
   ],
   'Stout': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.dark1, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden2, 400, 300),
+    stockImg('alcohol-3797764.jpg'),
+    stockImg('alcohol-3814913.jpg'),
   ],
   'Porter': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.dark1, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
+    stockImg('beer-3065711.jpg'),
+    stockImg('beer-3573276.jpg'),
   ],
   'Wheat Beer': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden4, 400, 300),
+    stockImg('beer-1482748.png'),
+    stockImg('beer-1777934.png'),
   ],
   'Belgian Ale': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber2, 400, 300),
+    stockImg('beer-2449887.jpg'),
+    stockImg('beer-428121.jpg'),
   ],
   'Sour': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.pub2, 400, 300),
+    stockImg('beer-1482748.png'),
+    stockImg('beer-1777934.png'),
   ],
   'Specialty': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden3, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
+    stockImg('beer-3445988.jpg'),
+    stockImg('beer-3634581.jpg'),
   ],
   'default': [
-    unsplashUrl(VERIFIED_BEER_PHOTOS.golden1, 400, 300),
-    unsplashUrl(VERIFIED_BEER_PHOTOS.amber1, 400, 300),
+    stockImg('beer-2019929.jpg'),
+    stockImg('beer-1605826.jpg'),
   ],
 };
 

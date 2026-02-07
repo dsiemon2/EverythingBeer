@@ -21,7 +21,8 @@ import {
   Star,
   Newspaper,
   Lightbulb,
-  Pen
+  Pen,
+  Home
 } from 'lucide-react';
 
 interface MenuSection {
@@ -270,6 +271,16 @@ export default function MegaMenu() {
 
       {/* Desktop menu */}
       <ul className="hidden lg:flex items-center gap-1">
+        {/* Home icon */}
+        <li>
+          <Link
+            href="/"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-brown-700 dark:text-stone-200 hover:bg-amber-100 dark:hover:bg-dark-elevated transition-colors font-medium"
+            title="Home"
+          >
+            <Home className="w-4 h-4" />
+          </Link>
+        </li>
         {menuItems.map((item) => (
           <li
             key={item.label}
@@ -345,6 +356,16 @@ export default function MegaMenu() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full right-0 mt-2 w-screen max-w-sm bg-white dark:bg-dark-surface rounded-xl shadow-2xl border border-amber-200 dark:border-dark-border p-4 animate-slide-down z-50">
           <ul className="space-y-2">
+            <li>
+              <Link
+                href="/"
+                className="flex items-center gap-3 p-3 rounded-lg text-brown-700 dark:text-stone-200 hover:bg-amber-100 dark:hover:bg-dark-elevated transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Home className="w-4 h-4" />
+                Home
+              </Link>
+            </li>
             {menuItems.map((item) => (
               <li key={item.label}>
                 <Link

@@ -20,6 +20,7 @@ const categoryColors: Record<string, string> = {
   events: 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
   opinion: 'bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300',
   industry: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300',
+  education: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300',
 };
 
 const categoryLabels: Record<string, string> = {
@@ -29,6 +30,7 @@ const categoryLabels: Record<string, string> = {
   events: 'Events',
   opinion: 'Opinion',
   industry: 'Industry',
+  education: 'Education',
 };
 
 export default function BlogDetailPage({ params }: BlogDetailPageProps) {
@@ -40,10 +42,10 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
       <div className="min-h-screen bg-background py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <Newspaper className="w-20 h-20 text-brown-300 mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-brown-800 dark:text-amber-100 mb-4">
+          <h1 className="text-3xl font-bold text-brown-800 dark:text-stone-100 mb-4">
             Article Not Found
           </h1>
-          <p className="text-brown-600 dark:text-brown-300 mb-8">
+          <p className="text-brown-600 dark:text-stone-300 mb-8">
             We couldn&apos;t find the article you&apos;re looking for.
           </p>
           <Link
@@ -76,14 +78,14 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
-      <div className="bg-amber-50 dark:bg-brown-900 border-b border-amber-100 dark:border-brown-800">
+      <div className="bg-amber-50 dark:bg-dark-surface border-b border-amber-100 dark:border-dark-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm">
-            <Link href="/beer-fyi" className="text-amber-600 hover:text-amber-700">
+            <Link href="/beer-fyi" className="text-amber-600 hover:text-amber-700 dark:text-neon-orange dark:hover:text-neon-red">
               Beer FYI
             </Link>
-            <span className="text-brown-400">/</span>
-            <span className="text-brown-600 dark:text-brown-300 truncate">{post.title}</span>
+            <span className="text-brown-400 dark:text-dark-muted">/</span>
+            <span className="text-brown-600 dark:text-stone-300 truncate">{post.title}</span>
           </div>
         </div>
       </div>
@@ -97,34 +99,34 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
             >
               {categoryLabels[post.category] || post.category}
             </span>
-            <span className="flex items-center gap-1 text-sm text-brown-500 dark:text-brown-400">
+            <span className="flex items-center gap-1 text-sm text-brown-500 dark:text-stone-400">
               <Clock className="w-4 h-4" />
               {post.read_time} min read
             </span>
-            <span className="flex items-center gap-1 text-sm text-brown-500 dark:text-brown-400">
+            <span className="flex items-center gap-1 text-sm text-brown-500 dark:text-stone-400">
               <Calendar className="w-4 h-4" />
               {publishDate}
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-brown-800 dark:text-amber-100 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-brown-800 dark:text-stone-100 mb-4">
             {post.title}
           </h1>
 
-          <p className="text-lg text-brown-600 dark:text-brown-300 mb-6">{post.excerpt}</p>
+          <p className="text-lg text-brown-600 dark:text-stone-300 mb-6">{post.excerpt}</p>
 
           {/* Author Card */}
           {author && (
             <Link
               href={`/beer-fyi/author/${author.id}`}
-              className="inline-flex items-center gap-3 p-3 rounded-xl bg-amber-50 dark:bg-brown-800 border border-amber-200 dark:border-brown-700 hover:border-amber-300 dark:hover:border-brown-600 transition-colors"
+              className="inline-flex items-center gap-3 p-3 rounded-xl bg-amber-50 dark:bg-dark-surface border border-amber-200 dark:border-dark-border hover:border-amber-300 dark:hover:border-neon-orange/40 transition-colors"
             >
               <div className="w-10 h-10 rounded-full bg-amber-200 dark:bg-amber-800 flex items-center justify-center">
                 <User className="w-5 h-5 text-amber-700 dark:text-amber-300" />
               </div>
               <div>
-                <div className="font-semibold text-brown-800 dark:text-amber-100">{author.name}</div>
-                <div className="text-sm text-brown-500 dark:text-brown-400">{author.role}</div>
+                <div className="font-semibold text-brown-800 dark:text-stone-100">{author.name}</div>
+                <div className="text-sm text-brown-500 dark:text-stone-400">{author.role}</div>
               </div>
             </Link>
           )}
@@ -149,64 +151,77 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
           </button>
         </header>
 
+        {/* Hero / Featured Image */}
+        <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-8">
+          <Image
+            src={getBlogImage(post.category, post.slug)}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 800px"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+        </div>
+
         {/* Content */}
         <div className="prose prose-amber prose-lg dark:prose-invert max-w-none mb-12">
-          <div className="bg-white dark:bg-brown-800 rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-brown-700">
+          <div className="bg-white dark:bg-dark-surface rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-dark-border">
             <ReactMarkdown
               components={{
                 h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold text-brown-800 dark:text-amber-100 mt-8 mb-4">
+                  <h1 className="text-3xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4">
                     {children}
                   </h1>
                 ),
                 h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold text-brown-800 dark:text-amber-100 mt-8 mb-4 pb-2 border-b border-amber-200 dark:border-brown-600">
+                  <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4 pb-2 border-b border-amber-200 dark:border-dark-border">
                     {children}
                   </h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-xl font-bold text-brown-800 dark:text-amber-100 mt-6 mb-3">
+                  <h3 className="text-xl font-bold text-brown-800 dark:text-stone-100 mt-6 mb-3">
                     {children}
                   </h3>
                 ),
                 p: ({ children }) => (
-                  <p className="text-brown-600 dark:text-brown-300 mb-4 leading-relaxed">
+                  <p className="text-brown-600 dark:text-stone-300 mb-4 leading-relaxed">
                     {children}
                   </p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside text-brown-600 dark:text-brown-300 mb-4 space-y-2">
+                  <ul className="list-disc list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
                     {children}
                   </ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside text-brown-600 dark:text-brown-300 mb-4 space-y-2">
+                  <ol className="list-decimal list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
                     {children}
                   </ol>
                 ),
                 li: ({ children }) => (
-                  <li className="text-brown-600 dark:text-brown-300">{children}</li>
+                  <li className="text-brown-600 dark:text-stone-300">{children}</li>
                 ),
                 strong: ({ children }) => (
-                  <strong className="font-bold text-brown-800 dark:text-amber-100">
+                  <strong className="font-bold text-brown-800 dark:text-stone-100">
                     {children}
                   </strong>
                 ),
-                hr: () => <hr className="my-8 border-amber-200 dark:border-brown-600" />,
+                hr: () => <hr className="my-8 border-amber-200 dark:border-dark-border" />,
                 table: ({ children }) => (
                   <div className="overflow-x-auto mb-6">
-                    <table className="w-full border-collapse border border-amber-200 dark:border-brown-600">
+                    <table className="w-full border-collapse border border-amber-200 dark:border-dark-border">
                       {children}
                     </table>
                   </div>
                 ),
                 th: ({ children }) => (
-                  <th className="border border-amber-200 dark:border-brown-600 bg-amber-50 dark:bg-brown-700 px-4 py-2 text-left font-semibold text-brown-800 dark:text-amber-100">
+                  <th className="border border-amber-200 dark:border-dark-border bg-amber-50 dark:bg-dark-elevated px-4 py-2 text-left font-semibold text-brown-800 dark:text-stone-100">
                     {children}
                   </th>
                 ),
                 td: ({ children }) => (
-                  <td className="border border-amber-200 dark:border-brown-600 px-4 py-2 text-brown-600 dark:text-brown-300">
+                  <td className="border border-amber-200 dark:border-dark-border px-4 py-2 text-brown-600 dark:text-stone-300">
                     {children}
                   </td>
                 ),
@@ -219,8 +234,8 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
 
         {/* Author Bio (bottom) */}
         {author && (
-          <div className="bg-amber-50 dark:bg-brown-800 rounded-2xl p-6 border border-amber-200 dark:border-brown-700 mb-12">
-            <h3 className="text-sm font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wider mb-4">
+          <div className="bg-amber-50 dark:bg-dark-surface rounded-2xl p-6 border border-amber-200 dark:border-dark-border mb-12">
+            <h3 className="text-sm font-semibold text-amber-700 dark:text-neon-orange uppercase tracking-wider mb-4">
               About the Author
             </h3>
             <Link
@@ -231,13 +246,13 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
                 <User className="w-7 h-7 text-amber-700 dark:text-amber-300" />
               </div>
               <div>
-                <div className="font-bold text-brown-800 dark:text-amber-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                <div className="font-bold text-brown-800 dark:text-stone-100 group-hover:text-amber-600 dark:group-hover:text-neon-orange transition-colors">
                   {author.name}
                 </div>
-                <div className="text-sm text-amber-600 dark:text-amber-400 mb-2">
+                <div className="text-sm text-amber-600 dark:text-neon-orange mb-2">
                   {author.role}
                 </div>
-                <p className="text-sm text-brown-600 dark:text-brown-300">{author.bio}</p>
+                <p className="text-sm text-brown-600 dark:text-stone-300">{author.bio}</p>
               </div>
             </Link>
           </div>
@@ -246,13 +261,13 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <section>
-            <h2 className="text-2xl font-bold text-brown-800 dark:text-amber-100 mb-6">
+            <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100 mb-6">
               Related Articles
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.id} href={`/beer-fyi/${relatedPost.slug}`}>
-                  <div className="beer-card bg-white dark:bg-brown-800 rounded-xl overflow-hidden border border-amber-100 dark:border-brown-700 h-full">
+                  <div className="beer-card bg-white dark:bg-dark-surface rounded-xl overflow-hidden border border-amber-100 dark:border-dark-border h-full">
                     <div className="h-32 relative overflow-hidden">
                       <Image
                         src={getBlogImage(relatedPost.category, relatedPost.slug)}
@@ -269,7 +284,7 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
                       >
                         {categoryLabels[relatedPost.category] || relatedPost.category}
                       </span>
-                      <h3 className="font-bold text-brown-800 dark:text-amber-100 line-clamp-2">
+                      <h3 className="font-bold text-brown-800 dark:text-stone-100 line-clamp-2">
                         {relatedPost.title}
                       </h3>
                     </div>
