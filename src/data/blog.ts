@@ -2,6 +2,54 @@ import { BlogPost } from '@/types';
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'blog-7',
+    slug: 'how-beer-shaped-the-world',
+    title: 'How Beer Shaped the World',
+    excerpt: 'From sparking the agricultural revolution to building the pyramids, founding America, and advancing modern medicine — beer has been one of the most influential forces in human history.',
+    content: `# How Beer Shaped the World
+
+Civilization began with a groundbreaking invention — not the wheel or bread, but beer. In fact, the agricultural revolution emerged largely because of beer. Without it, we might still be living in caves!
+
+In humanity's early days, we were nomadic hunter-gatherers. But around 9000 B.C., in Mesopotamia, people began farming, marking the start of the agricultural revolution. Many believed the reason was to grow barley for bread, but new evidence suggests otherwise. Residue found in ancient jugs shows that beer existed even before bread.
+
+Beer, it seems, was discovered by accident. Hunter-gatherers would collect barley in pots or baskets, leaving it outside. After repeated rains, the barley would soak, and wild yeast would ferment it into alcohol. When someone finally tasted it, they thought, "This is good! How can we make more?" And so, the quest for beer fueled advancements in agricultural technology, including irrigation.
+
+Beer even gave rise to mathematics, writing, land surveys, and bookkeeping — making it a driving force in the development of early civilization.
+
+## Beer Built the Pyramids
+
+Ancient Egypt wouldn't have thrived without beer, which they viewed as a divine gift. Pyramid builders were paid in beer — one gallon a day. In fact, beer was considered so essential that it became a form of currency. Ancient beer was likely low in alcohol but rich in nutrients, providing essential sustenance to workers.
+
+## Beer in the Middle Ages
+
+During the Middle Ages, life in Europe was short and fraught with war, plague, and disease. Drinking water was often unsafe, making people sick with bacteria like E. coli. Fortunately, the brewing process naturally removed harmful bacteria, making beer the drink of choice for everyone — from babies to the elderly. On average, people in this period drank six times more beer than we do today.
+
+## Beer and the Founding of America
+
+Beer played a significant role in America's founding. Many of the Founding Fathers — George Washington, Thomas Jefferson, and Samuel Adams — were brewers. Benjamin Franklin famously said, "Beer is proof that God loves us and wants us to be happy."
+
+Beer even influenced the course of the Mayflower's journey. When the ship ran out of beer, the settlers made an unscheduled stop at Plymouth, rather than continuing to Virginia, so they could brew more. Taverns became central hubs for early American life, hosting business, political meetings, and social gatherings. In fact, the seeds of the American Revolution were sown in a tavern, with the Sons of Liberty gathering at the Green Dragon Tavern to discuss their plans over beer before marching to the Boston Harbor for the famous Tea Party.
+
+During the Revolutionary War, soldiers were given a daily ration of spruce beer. Colonists experimented with regional ingredients like apples, molasses, and sassafras to brew their own beer, and by 1873, the U.S. boasted over 4,000 breweries.
+
+## Beer and Modern Medicine
+
+Beer also helped shape modern science and medicine. In the 19th century, beer led to one of the most significant medical discoveries — Louis Pasteur's germ theory. While studying beer, Pasteur discovered bacteria and yeast cells, which paved the way for the development of vaccines.
+
+Refrigeration was another breakthrough sparked by beer. In the 19th century, beer production slowed during the warm months, as it couldn't be brewed until winter. This limitation led brewers to dream of artificial refrigeration, which eventually became a reality, revolutionizing food storage and preservation.
+
+## Beer's Enduring Legacy
+
+Beer has changed the course of history in countless ways. It even played a role in ending child labor and inspiring the Star-Spangled Banner, which was based on an 18th-century drinking song. From ancient times to modern society, beer has not only quenched thirsts but also driven advancements in technology, medicine, and civilization itself.`,
+    author_id: 'brewmaster-brian',
+    published_at: '2025-03-25',
+    category: 'education',
+    tags: ['history', 'civilization', 'culture', 'ancient beer', 'brewing history'],
+    read_time: 6,
+    featured_image: null,
+    updated_at: '2025-03-25',
+  },
+  {
     id: 'blog-6',
     slug: 'reinheitsgebot-german-purity-law',
     title: 'The Reinheitsgebot: The German Purity Law That Shaped Beer Forever',

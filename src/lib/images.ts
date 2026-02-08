@@ -216,6 +216,7 @@ export function getBlogImage(category: string, postId: string): string {
     'ipa-vs-pale-ale-showdown': stockImg('beers-1283566.jpg'),
     'hops-the-flower-behind-the-flavor': stockImg('hops-1678583.jpg'),
     'reinheitsgebot-german-purity-law': rootImg('reinheitsgebot.jpg'),
+    'how-beer-shaped-the-world': stockImg('beer-barrel-956322.jpg'),
   };
 
   if (specificImages[postId]) {

@@ -15,7 +15,6 @@ import {
   GitCompare,
   ChevronRight,
   Zap,
-  TrendingUp,
   Star,
 } from 'lucide-react';
 import { blogPosts } from '@/data/blog';
@@ -520,36 +519,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* SECTION 6: Newsletter CTA                     */}
-      {/* ============================================ */}
-      <section className="py-16 bg-dark-surface border-t border-dark-border">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-            Stay Updated
-          </h2>
-          <p className="text-stone-400 mb-6">
-            Get weekly beer recommendations, new brewery spotlights, and exclusive guides
-            delivered to your inbox.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg bg-dark-elevated border border-dark-border text-stone-200 placeholder-dark-muted focus:outline-none focus:ring-2 focus:ring-neon-orange"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-gradient-to-r from-neon-red to-neon-orange hover:from-red-700 hover:to-orange-600 text-white font-semibold rounded-lg transition-all"
-            >
-              Subscribe
-            </button>
-          </form>
-          <p className="text-xs text-dark-muted mt-3">
-            No spam, unsubscribe anytime. Must be 21+.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
