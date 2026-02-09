@@ -452,7 +452,34 @@ export default function Home() {
                 />
               </a>
 
-              {/* 5. Quick Explore Tools (bottom) */}
+              {/* 5. Homebrewing Simplified Book Ad */}
+              <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
+                <div className="bg-gradient-to-r from-neon-orange to-neon-rust px-4 py-3">
+                  <h3 className="text-white font-bold text-sm">
+                    📖 From the Author
+                  </h3>
+                </div>
+                <div className="p-4 text-center">
+                  <Image
+                    src="/everythingbeer/images/homebrewing-simplified.png"
+                    alt="Homebrewing Simplified - A Beginner's Guide To Making Your Own Beer! by Bryan Siemon"
+                    width={250}
+                    height={350}
+                    className="mx-auto mb-3 rounded-lg"
+                  />
+                  <h4 className="font-bold text-brown-800 dark:text-stone-100 text-sm mb-1">
+                    Homebrewing Simplified
+                  </h4>
+                  <p className="text-xs text-brown-500 dark:text-stone-400 mb-3">
+                    A Beginner&apos;s Guide To Making Your Own Beer!
+                  </p>
+                  <p className="text-[10px] text-brown-400 dark:text-dark-muted">
+                    By Bryan Siemon
+                  </p>
+                </div>
+              </div>
+
+              {/* 6. Quick Explore Tools (bottom) */}
               <div className="bg-white dark:bg-dark-surface rounded-xl border border-amber-100 dark:border-dark-border overflow-hidden">
                 <div className="bg-gradient-to-r from-neon-blue to-neon-blue/70 px-4 py-3">
                   <h3 className="text-white font-bold text-sm flex items-center gap-2">

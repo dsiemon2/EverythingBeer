@@ -232,6 +232,33 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </div>
 
+        {/* Homebrewing Simplified Book Promo */}
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-dark-surface dark:to-dark-elevated rounded-2xl p-6 border border-amber-200 dark:border-dark-border mb-12">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <Image
+              src="/everythingbeer/images/homebrewing-simplified.png"
+              alt="Homebrewing Simplified - A Beginner's Guide To Making Your Own Beer! by Bryan Siemon"
+              width={140}
+              height={196}
+              className="rounded-lg flex-shrink-0"
+            />
+            <div className="text-center sm:text-left">
+              <p className="text-xs font-semibold text-neon-rust dark:text-neon-orange uppercase tracking-wider mb-2">
+                📖 From the Author
+              </p>
+              <h3 className="text-xl font-bold text-brown-800 dark:text-stone-100 mb-2">
+                Homebrewing Simplified
+              </h3>
+              <p className="text-sm text-brown-600 dark:text-stone-300 mb-1">
+                A Beginner&apos;s Guide To Making Your Own Beer!
+              </p>
+              <p className="text-xs text-brown-400 dark:text-dark-muted">
+                By Bryan Siemon
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Author Bio (bottom) */}
         {author && (
           <div className="bg-amber-50 dark:bg-dark-surface rounded-2xl p-6 border border-amber-200 dark:border-dark-border mb-12">
