@@ -2,6 +2,48 @@ import { BlogPost } from '@/types';
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'blog-8',
+    slug: 'the-history-of-beer',
+    title: 'The History of Beer',
+    excerpt: 'From ancient Babylon to modern microbreweries, beer has been at the center of civilization for over 8,000 years. Explore its origins, the science that shaped it, and how it conquered the world.',
+    content: `# The History of Beer
+
+## Ancient Origins
+
+Beer may be one of the world's oldest professions. Some historians believe beer was the very foundation of civilization, suggesting that humans began living in settled villages and cultivating crops specifically to brew it. While most historical accounts cite ancient Babylon — roughly 8,000 years ago — as the birthplace of beer, archaeological digs show that 6,000 years ago in Mesopotamia, early communities raised barley specifically for brewing rather than baking bread. Pottery from that period depicts workers stirring vats, and ancient household records often include beer supply lists and recipes.
+
+Most scholars believe beer was discovered by accident. Perhaps a basket of barley was left in the rain; airborne yeast eventually mixed with the wet grain, and a few days later, a sweet-tasting, foamy liquid was discovered that provided a "joyful feeling."
+
+## The Middle Ages and Tradition
+
+In Medieval times, homebrewing was the standard, and women — the "brewsters" — were typically the masters of the craft. Interestingly, the word "bridal" comes from "bride ale," a reference to wedding feasts that featured special batches of beer brewed by the village women.
+
+While wine was the drink of the privileged classes in ancient Greece and Rome, beer was the drink of the people. In the north, the Celts brought their brewing expertise westward. Because Northern and Central Europeans were masters of woodworking, they fashioned brewing vessels and barrels out of wood, whereas Southerners continued to use pottery.
+
+## Regulation and Science
+
+Beer often served as currency or a means to pay taxes. In 1516, the **German Purity Law (Reinheitsgebot)** became the first regulation to dictate beer ingredients. Later, in 1614, James I of England imposed the first malt tax. Monasteries also played a massive role; in 1086, the monks of St. Paul's in London brewed nearly 70,000 gallons of ale. Some monks were even convinced that mortar mixed with ale instead of water made for stronger church walls.
+
+For centuries, beer was considered a health drink. The alcohol content made it a safe alternative to contaminated water, helping to prevent diseases like typhoid and cholera. However, brewing remained more of an art than a science until the late 17th century.
+
+- **1680:** Antonie van Leeuwenhoek used a microscope to discover yeast in a drop of beer.
+- **1860:** Louis Pasteur proved that beer went sour due to airborne organisms and introduced heat (pasteurization) to stop it.
+- **1883:** Emil Christian Hansen identified "wild yeast" as a cause for inconsistent batches, leading to the use of pure yeast cultures.
+
+## The Global Expansion
+
+The export of beer boomed in the 19th century. The British shipped pale ale to soldiers in India, adding extra hops to act as a preservative for the long journey. This birthed the **India Pale Ale (IPA)**.
+
+Today, the beer market is global. You can find German, English, and Japanese beers almost anywhere. In the United States, **Yuengling** (founded in 1829) remains the oldest operating brewery. From the rise of Samuel Adams to the explosion of local microbreweries, beer lovers now have more choices than ever before.`,
+    author_id: 'brewmaster-brian',
+    published_at: '2025-03-30',
+    category: 'education',
+    tags: ['history', 'ancient beer', 'brewing science', 'IPA origins', 'medieval brewing'],
+    read_time: 7,
+    featured_image: null,
+    updated_at: '2025-03-30',
+  },
+  {
     id: 'blog-7',
     slug: 'how-beer-shaped-the-world',
     title: 'How Beer Shaped the World',

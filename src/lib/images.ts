@@ -217,6 +217,7 @@ export function getBlogImage(category: string, postId: string): string {
     'hops-the-flower-behind-the-flavor': stockImg('hops-1678583.jpg'),
     'reinheitsgebot-german-purity-law': rootImg('reinheitsgebot.jpg'),
     'how-beer-shaped-the-world': stockImg('beer-barrel-956322.jpg'),
+    'the-history-of-beer': stockImg('beer-3634581.jpg'),
   };
 
   if (specificImages[postId]) {
