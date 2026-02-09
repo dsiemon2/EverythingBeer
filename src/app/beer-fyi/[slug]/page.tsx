@@ -165,72 +165,122 @@ export default function BlogDetailPage({ params }: BlogDetailPageProps) {
         </div>
 
         {/* Content */}
-        <div className="prose prose-amber prose-lg dark:prose-invert max-w-none mb-12">
-          <div className="bg-white dark:bg-dark-surface rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-dark-border">
-            <ReactMarkdown
-              components={{
-                h1: ({ children }) => (
-                  <h1 className="text-3xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4">
-                    {children}
-                  </h1>
-                ),
-                h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4 pb-2 border-b border-amber-200 dark:border-dark-border">
-                    {children}
-                  </h2>
-                ),
-                h3: ({ children }) => (
-                  <h3 className="text-xl font-bold text-brown-800 dark:text-stone-100 mt-6 mb-3">
-                    {children}
-                  </h3>
-                ),
-                p: ({ children }) => (
-                  <p className="text-brown-600 dark:text-stone-300 mb-4 leading-relaxed">
-                    {children}
+        {(() => {
+          const markdownComponents = {
+            h1: ({ children }: { children?: React.ReactNode }) => (
+              <h1 className="text-3xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4">
+                {children}
+              </h1>
+            ),
+            h2: ({ children }: { children?: React.ReactNode }) => (
+              <h2 className="text-2xl font-bold text-brown-800 dark:text-stone-100 mt-8 mb-4 pb-2 border-b border-amber-200 dark:border-dark-border">
+                {children}
+              </h2>
+            ),
+            h3: ({ children }: { children?: React.ReactNode }) => (
+              <h3 className="text-xl font-bold text-brown-800 dark:text-stone-100 mt-6 mb-3">
+                {children}
+              </h3>
+            ),
+            p: ({ children }: { children?: React.ReactNode }) => (
+              <p className="text-brown-600 dark:text-stone-300 mb-4 leading-relaxed">
+                {children}
+              </p>
+            ),
+            ul: ({ children }: { children?: React.ReactNode }) => (
+              <ul className="list-disc list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
+                {children}
+              </ul>
+            ),
+            ol: ({ children }: { children?: React.ReactNode }) => (
+              <ol className="list-decimal list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
+                {children}
+              </ol>
+            ),
+            li: ({ children }: { children?: React.ReactNode }) => (
+              <li className="text-brown-600 dark:text-stone-300">{children}</li>
+            ),
+            strong: ({ children }: { children?: React.ReactNode }) => (
+              <strong className="font-bold text-brown-800 dark:text-stone-100">
+                {children}
+              </strong>
+            ),
+            hr: () => <hr className="my-8 border-amber-200 dark:border-dark-border" />,
+            table: ({ children }: { children?: React.ReactNode }) => (
+              <div className="overflow-x-auto mb-6">
+                <table className="w-full border-collapse border border-amber-200 dark:border-dark-border">
+                  {children}
+                </table>
+              </div>
+            ),
+            th: ({ children }: { children?: React.ReactNode }) => (
+              <th className="border border-amber-200 dark:border-dark-border bg-amber-50 dark:bg-dark-elevated px-4 py-2 text-left font-semibold text-brown-800 dark:text-stone-100">
+                {children}
+              </th>
+            ),
+            td: ({ children }: { children?: React.ReactNode }) => (
+              <td className="border border-amber-200 dark:border-dark-border px-4 py-2 text-brown-600 dark:text-stone-300">
+                {children}
+              </td>
+            ),
+          };
+
+          const bookAd = (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-dark-elevated dark:to-dark-surface rounded-2xl p-6 border border-amber-200 dark:border-dark-border my-8">
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <Image
+                  src="/everythingbeer/images/homebrewing-simplified.png"
+                  alt="Homebrewing Simplified - A Beginner's Guide To Making Your Own Beer! by Bryan Siemon"
+                  width={120}
+                  height={168}
+                  className="rounded-lg flex-shrink-0"
+                />
+                <div className="text-center sm:text-left">
+                  <p className="text-xs font-semibold text-neon-rust dark:text-neon-orange uppercase tracking-wider mb-2">
+                    📖 From the Author
                   </p>
-                ),
-                ul: ({ children }) => (
-                  <ul className="list-disc list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
-                    {children}
-                  </ul>
-                ),
-                ol: ({ children }) => (
-                  <ol className="list-decimal list-inside text-brown-600 dark:text-stone-300 mb-4 space-y-2">
-                    {children}
-                  </ol>
-                ),
-                li: ({ children }) => (
-                  <li className="text-brown-600 dark:text-stone-300">{children}</li>
-                ),
-                strong: ({ children }) => (
-                  <strong className="font-bold text-brown-800 dark:text-stone-100">
-                    {children}
-                  </strong>
-                ),
-                hr: () => <hr className="my-8 border-amber-200 dark:border-dark-border" />,
-                table: ({ children }) => (
-                  <div className="overflow-x-auto mb-6">
-                    <table className="w-full border-collapse border border-amber-200 dark:border-dark-border">
-                      {children}
-                    </table>
+                  <h3 className="text-lg font-bold text-brown-800 dark:text-stone-100 mb-2">
+                    Homebrewing Simplified
+                  </h3>
+                  <p className="text-sm text-brown-600 dark:text-stone-300 mb-1">
+                    A Beginner&apos;s Guide To Making Your Own Beer!
+                  </p>
+                  <p className="text-xs text-brown-400 dark:text-dark-muted">
+                    By Bryan Siemon
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+
+          // For homebrewing post, split content and insert book ad in the middle
+          if (post.slug === 'home-brewing-getting-started') {
+            const splitMarker = '## Your First Brew: Extract Brewing';
+            const splitIndex = post.content.indexOf(splitMarker);
+            if (splitIndex !== -1) {
+              const contentBefore = post.content.substring(0, splitIndex);
+              const contentAfter = post.content.substring(splitIndex);
+              return (
+                <div className="prose prose-amber prose-lg dark:prose-invert max-w-none mb-12">
+                  <div className="bg-white dark:bg-dark-surface rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-dark-border">
+                    <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>
+                    {bookAd}
+                    <ReactMarkdown components={markdownComponents}>{contentAfter}</ReactMarkdown>
                   </div>
-                ),
-                th: ({ children }) => (
-                  <th className="border border-amber-200 dark:border-dark-border bg-amber-50 dark:bg-dark-elevated px-4 py-2 text-left font-semibold text-brown-800 dark:text-stone-100">
-                    {children}
-                  </th>
-                ),
-                td: ({ children }) => (
-                  <td className="border border-amber-200 dark:border-dark-border px-4 py-2 text-brown-600 dark:text-stone-300">
-                    {children}
-                  </td>
-                ),
-              }}
-            >
-              {post.content}
-            </ReactMarkdown>
-          </div>
-        </div>
+                </div>
+              );
+            }
+          }
+
+          // Default: render content normally
+          return (
+            <div className="prose prose-amber prose-lg dark:prose-invert max-w-none mb-12">
+              <div className="bg-white dark:bg-dark-surface rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-dark-border">
+                <ReactMarkdown components={markdownComponents}>{post.content}</ReactMarkdown>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Homebrewing Simplified Book Promo */}
         <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-dark-surface dark:to-dark-elevated rounded-2xl p-6 border border-amber-200 dark:border-dark-border mb-12">
