@@ -131,6 +131,8 @@ export interface PintSizedPost {
   category: 'history' | 'science' | 'culture' | 'stats' | 'did-you-know';
   icon?: string;
   created_at: string;
+  article_slug?: string;
+  article_title?: string;
 }
 
 export interface BeerNews {

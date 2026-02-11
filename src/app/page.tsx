@@ -18,7 +18,7 @@ import {
   Star,
 } from 'lucide-react';
 import { blogPosts } from '@/data/blog';
-import { pintSizedPosts } from '@/data/pint-sized-posts';
+import { getRecentFacts, getRandomRecentFacts } from '@/data/pint-sized-posts';
 import { beerNews, getNewsCategoryLabel } from '@/data/beer-news';
 import { videos } from '@/data/videos';
 import { guides } from '@/data/guides';
@@ -29,7 +29,8 @@ export default function Home() {
   const featuredArticle = blogPosts[0];
   const sidebarArticles = blogPosts.slice(1, 4);
   const latestNews = beerNews.slice(0, 6);
-  const randomFacts = pintSizedPosts.slice(0, 6);
+  const recentFacts = getRecentFacts(30);
+  const randomFacts = recentFacts.slice(0, 6);
   const featuredVideos = videos.slice(0, 4);
   const featuredGuides = guides.slice(0, 3);
   const featuredAuthor = featuredArticle ? getAuthorById(featuredArticle.author_id) : null;
