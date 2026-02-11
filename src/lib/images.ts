@@ -146,9 +146,80 @@ export function getBeerImageUrl(beerId: string, styleId: string): string {
 }
 
 // ============================================================
-// Brewery images
+// Brewery images - Hybrid system
+// 1. Curated breweries get individual images from /images/breweries/curated/
+// 2. API breweries get type-based images from /images/breweries/{type}/
+// 3. Fallback to generic brewery images
+//
+// SEO image naming convention:
+//   Curated:  {brewery-name}-{city}-{state-or-country}.jpg
+//   Example:  sierra-nevada-brewing-chico-california.jpg
+//   Type pools: descriptive keyword names
+//   Example:  craft-microbrewery-taproom-interior.jpg
 // ============================================================
-export const breweryImages = [
+
+function breweryImg(path: string): string {
+  return `${BASE}/breweries/${path}`;
+}
+
+// Curated brewery images - map brewery ID to specific image file
+// When you add an image for a curated brewery, add the mapping here
+// Image should be placed in public/images/breweries/curated/
+const curatedBreweryImages: Record<string, string> = {
+  // Commercial breweries - add images as they become available
+  // 'curated-anheuser-busch': breweryImg('curated/anheuser-busch-st-louis-missouri.jpg'),
+  // 'curated-molson-coors': breweryImg('curated/molson-coors-chicago-illinois.jpg'),
+  // 'curated-heineken': breweryImg('curated/heineken-amsterdam-netherlands.jpg'),
+  // 'curated-constellation-brands': breweryImg('curated/constellation-brands-victor-new-york.jpg'),
+  // 'curated-pabst': breweryImg('curated/pabst-brewing-company-los-angeles-california.jpg'),
+  // 'curated-guinness': breweryImg('curated/guinness-st-james-gate-dublin-ireland.jpg'),
+  // 'curated-carlsberg': breweryImg('curated/carlsberg-brewery-copenhagen-denmark.jpg'),
+  // 'curated-asahi': breweryImg('curated/asahi-brewery-tokyo-japan.jpg'),
+  // Craft breweries - add images as they become available
+  // 'curated-sierra-nevada': breweryImg('curated/sierra-nevada-brewing-chico-california.jpg'),
+  // 'curated-dogfish-head': breweryImg('curated/dogfish-head-brewery-milton-delaware.jpg'),
+  // 'curated-stone-brewing': breweryImg('curated/stone-brewing-escondido-california.jpg'),
+  // 'curated-bells': breweryImg('curated/bells-brewery-galesburg-michigan.jpg'),
+  // 'curated-founders': breweryImg('curated/founders-brewing-grand-rapids-michigan.jpg'),
+  // 'curated-lagunitas': breweryImg('curated/lagunitas-brewing-petaluma-california.jpg'),
+  // 'curated-deschutes': breweryImg('curated/deschutes-brewery-bend-oregon.jpg'),
+  // 'curated-new-belgium': breweryImg('curated/new-belgium-brewing-fort-collins-colorado.jpg'),
+  // 'curated-oskar-blues': breweryImg('curated/oskar-blues-brewery-longmont-colorado.jpg'),
+  // 'curated-treehouse': breweryImg('curated/tree-house-brewing-charlton-massachusetts.jpg'),
+  // 'curated-russian-river': breweryImg('curated/russian-river-brewing-santa-rosa-california.jpg'),
+  // 'curated-allagash': breweryImg('curated/allagash-brewing-portland-maine.jpg'),
+};
+
+// Type-based brewery image pools
+// Images in public/images/breweries/{type}/
+const breweryTypeImages: Record<string, string[]> = {
+  large: [
+    breweryImg('large/factory-1.jpg'),
+    breweryImg('large/industrial-1.jpg'),
+    breweryImg('large/brewery-1.jpg'),
+    breweryImg('large/kegs-1.jpg'),
+  ],
+  micro: [
+    breweryImg('micro/brewery-1.jpg'),
+    breweryImg('micro/taproom-1.jpg'),
+    breweryImg('micro/barrels-1.jpg'),
+    breweryImg('micro/bottles-1.jpg'),
+  ],
+  brewpub: [
+    breweryImg('brewpub/bar-1.jpg'),
+    breweryImg('brewpub/pub-1.jpg'),
+    breweryImg('brewpub/dining-1.jpg'),
+  ],
+  regional: [
+    breweryImg('regional/brewery-1.jpg'),
+    breweryImg('regional/production-1.jpg'),
+    breweryImg('regional/kegs-1.jpg'),
+    breweryImg('regional/facility-1.jpg'),
+  ],
+};
+
+// Fallback pool for types without their own folder (nano, planning, contract, etc.)
+const breweryFallbackImages = [
   aiImg('brewery_1.jpg'),
   aiImg('brewery_2.jpg'),
   stockImg('buildings-1245953.jpg'),
@@ -159,9 +230,32 @@ export const breweryImages = [
   stockImg('brew-1031484.jpg'),
 ];
 
-export function getBreweryImage(breweryId: string): string {
+// Get image for a brewery - checks curated first, then type pool, then fallback
+export function getBreweryImage(breweryId: string, breweryType?: string): string {
+  // 1. Check for curated brewery-specific image
+  if (curatedBreweryImages[breweryId]) {
+    return curatedBreweryImages[breweryId];
+  }
+
+  // 2. Check for type-based image pool
+  const typePool = breweryType ? breweryTypeImages[breweryType] : null;
+  if (typePool && typePool.length > 0) {
+    const hash = breweryId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return typePool[hash % typePool.length];
+  }
+
+  // 3. Fallback to generic brewery images
   const hash = breweryId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return breweryImages[hash % breweryImages.length];
+  return breweryFallbackImages[hash % breweryFallbackImages.length];
+}
+
+// Generate SEO-friendly alt text for brewery images
+export function getBreweryImageAlt(breweryName: string, city?: string, state?: string, country?: string): string {
+  const location = [city, state, country].filter(Boolean).join(', ');
+  if (location) {
+    return `${breweryName} brewery in ${location}`;
+  }
+  return `${breweryName} brewery`;
 }
 
 // ============================================================

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Globe, Building2, Phone } from 'lucide-react';
 import type { Brewery } from '@/types';
-import { getBreweryImage } from '@/lib/images';
+import { getBreweryImage, getBreweryImageAlt } from '@/lib/images';
 
 interface BreweryCardProps {
   brewery: Brewery;
@@ -43,8 +43,8 @@ export default function BreweryCard({ brewery }: BreweryCardProps) {
         {/* Header with image */}
         <div className="relative h-36 overflow-hidden">
           <Image
-            src={getBreweryImage(brewery.id)}
-            alt={brewery.name}
+            src={getBreweryImage(brewery.id, brewery.brewery_type)}
+            alt={getBreweryImageAlt(brewery.name, brewery.city, brewery.state_province || brewery.state, brewery.country)}
             fill
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

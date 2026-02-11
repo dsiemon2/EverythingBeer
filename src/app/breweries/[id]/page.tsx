@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Building2, MapPin, Globe, Phone, ArrowLeft, ExternalLink, Navigation, Map } from 'lucide-react';
 import type { Brewery } from '@/types';
-import { getBreweryImage } from '@/lib/images';
+import { getBreweryImage, getBreweryImageAlt } from '@/lib/images';
 
 interface BreweryDetailPageProps {
   params: Promise<{ id: string }>;
@@ -116,8 +116,8 @@ export default function BreweryDetailPage({ params }: BreweryDetailPageProps) {
           {/* Header */}
           <div className="h-48 relative overflow-hidden">
             <Image
-              src={getBreweryImage(brewery.id)}
-              alt={brewery.name}
+              src={getBreweryImage(brewery.id, brewery.brewery_type)}
+              alt={getBreweryImageAlt(brewery.name, brewery.city, brewery.state_province || brewery.state, brewery.country)}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 800px"

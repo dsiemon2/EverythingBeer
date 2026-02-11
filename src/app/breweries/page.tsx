@@ -6,7 +6,7 @@ import { Building2, Search, MapPin, Filter, Star, Globe, Sparkles, Factory } fro
 import Image from 'next/image';
 import BreweryCard from '@/components/BreweryCard';
 import type { Brewery } from '@/types';
-import { getBreweryImage } from '@/lib/images';
+import { getBreweryImage, getBreweryImageAlt } from '@/lib/images';
 import { commercialBreweries, craftBreweries, type CuratedBrewery } from '@/data/curated-breweries';
 
 function CuratedBreweryCard({ brewery }: { brewery: CuratedBrewery }) {
@@ -15,8 +15,8 @@ function CuratedBreweryCard({ brewery }: { brewery: CuratedBrewery }) {
       {/* Header with image */}
       <div className="relative h-36 overflow-hidden">
         <Image
-          src={getBreweryImage(brewery.id)}
-          alt={brewery.name}
+          src={getBreweryImage(brewery.id, brewery.brewery_type)}
+          alt={getBreweryImageAlt(brewery.name, brewery.city, brewery.state, brewery.country)}
           fill
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
