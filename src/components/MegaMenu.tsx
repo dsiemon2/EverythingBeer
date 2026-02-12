@@ -208,26 +208,26 @@ const menuItems: MenuItem[] = [
     icon: <Home className="w-4 h-4" />,
     megaMenu: [
       {
-        title: 'Calculators & Tools',
+        title: 'Brewing',
         links: [
-          { href: '/homebrew/abv-calculator', label: 'ABV Calculator', description: 'Calculate alcohol content', icon: <Calculator className="w-4 h-4" /> },
-          { href: '/homebrew/ibu-calculator', label: 'IBU Calculator', description: 'Estimate hop bitterness', icon: <FlaskConical className="w-4 h-4" /> },
-          { href: '/homebrew/hydrometer', label: 'Hydrometer Guide', description: 'Read & correct readings', icon: <Thermometer className="w-4 h-4" /> },
+          { href: '/beer-fyi/home-brewing-getting-started', label: 'Home Brewing 101', description: 'Getting started article', icon: <Pen className="w-4 h-4" /> },
+          { href: '/homebrew', label: 'All Homebrewing', description: 'Complete section', icon: <Home className="w-4 h-4" /> },
+          { href: '/homebrew/recipes', label: 'Recipes', description: 'Step-by-step brew guides', icon: <BookOpen className="w-4 h-4" /> },
         ],
       },
       {
         title: 'Reference',
         links: [
-          { href: '/homebrew/hops', label: 'Hop Chart', description: '50+ varieties compared', icon: <Hop className="w-4 h-4" /> },
           { href: '/homebrew/equipment', label: 'Equipment Guide', description: 'Starter to advanced', icon: <Wrench className="w-4 h-4" /> },
+          { href: '/homebrew/hops', label: 'Hop Chart', description: '50+ varieties compared', icon: <Hop className="w-4 h-4" /> },
         ],
       },
       {
-        title: 'Brewing',
+        title: 'Calculators & Tools',
         links: [
-          { href: '/homebrew/recipes', label: 'Recipes', description: 'Step-by-step brew guides', icon: <BookOpen className="w-4 h-4" /> },
-          { href: '/homebrew', label: 'All Homebrewing', description: 'Complete section', icon: <Home className="w-4 h-4" /> },
-          { href: '/beer-fyi/home-brewing-getting-started', label: 'Home Brewing 101', description: 'Getting started article', icon: <Pen className="w-4 h-4" /> },
+          { href: '/homebrew/abv-calculator', label: 'ABV Calculator', description: 'Calculate alcohol content', icon: <Calculator className="w-4 h-4" /> },
+          { href: '/homebrew/ibu-calculator', label: 'IBU Calculator', description: 'Estimate hop bitterness', icon: <FlaskConical className="w-4 h-4" /> },
+          { href: '/homebrew/hydrometer', label: 'Hydrometer Guide', description: 'Read & correct readings', icon: <Thermometer className="w-4 h-4" /> },
         ],
       },
     ],
