@@ -259,6 +259,21 @@ export function getBreweryImageAlt(breweryName: string, city?: string, state?: s
 }
 
 // ============================================================
+// Brewery type landing page hero images
+// ============================================================
+const breweryTypeHeroImages: Record<string, string> = {
+  commercial: stockImg('factory-1518504.jpg'),
+  craft: stockImg('brew-1031484.jpg'),
+  micro: breweryImg('micro/taproom-1.jpg'),
+  regional: breweryImg('regional/facility-1.jpg'),
+  homebrew: stockImg('brew-1031484.jpg'),
+};
+
+export function getBreweryTypeHeroImage(type: string): string {
+  return breweryTypeHeroImages[type] || stockImg('beer-2019929.jpg');
+}
+
+// ============================================================
 // Guide images by category
 // ============================================================
 export const guideImages: Record<string, string> = {

@@ -87,16 +87,17 @@ const menuItems: MenuItem[] = [
         title: 'Discover Breweries',
         links: [
           { href: '/breweries', label: 'All Breweries', description: 'Complete brewery directory', icon: <Building2 className="w-4 h-4" /> },
-          { href: '/breweries?filter=commercial', label: 'Commercial Breweries', description: 'Major producers', icon: <Globe className="w-4 h-4" /> },
-          { href: '/breweries?filter=craft', label: 'Craft Breweries', description: 'Independent & artisanal', icon: <Sparkles className="w-4 h-4" /> },
-          { href: '/breweries?type=micro', label: 'Microbreweries', description: 'Small batch producers', icon: <Star className="w-4 h-4" /> },
+          { href: '/breweries/commercial', label: 'Commercial Breweries', description: 'Major producers', icon: <Globe className="w-4 h-4" /> },
+          { href: '/breweries/craft', label: 'Craft Breweries', description: 'Independent & artisanal', icon: <Sparkles className="w-4 h-4" /> },
+          { href: '/breweries/micro', label: 'Microbreweries', description: 'Small batch producers', icon: <Star className="w-4 h-4" /> },
         ],
       },
       {
         title: 'By Type',
         links: [
+          { href: '/breweries/regional', label: 'Regional Breweries', description: 'Large craft producers', icon: <MapPin className="w-4 h-4" /> },
           { href: '/breweries?type=brewpub', label: 'Brewpubs', description: 'Brew & dine experiences', icon: <Beer className="w-4 h-4" /> },
-          { href: '/breweries?type=regional', label: 'Regional Breweries', description: 'Large craft producers', icon: <MapPin className="w-4 h-4" /> },
+          { href: '/breweries/homebrew', label: 'Homebrewing', description: 'Brew your own beer', icon: <Home className="w-4 h-4" /> },
         ],
       },
       {

@@ -443,3 +443,11 @@ export function getCuratedCommercialBreweries(): CuratedBrewery[] {
 export function getCuratedCraftBreweries(): CuratedBrewery[] {
   return craftBreweries;
 }
+
+export function getCuratedMicroBreweries(): CuratedBrewery[] {
+  return craftBreweries.filter(b => b.brewery_type === 'micro');
+}
+
+export function getCuratedRegionalBreweries(): CuratedBrewery[] {
+  return craftBreweries.filter(b => b.brewery_type === 'regional');
+}
