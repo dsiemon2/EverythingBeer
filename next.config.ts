@@ -38,6 +38,11 @@ const nextConfig: NextConfig = {
         destination: '/breweries/regional',
         permanent: true,
       },
+      {
+        source: '/breweries/homebrew',
+        destination: '/homebrew',
+        permanent: true,
+      },
     ];
   },
 };

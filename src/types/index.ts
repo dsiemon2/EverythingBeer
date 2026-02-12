@@ -169,3 +169,68 @@ export interface SearchFilters {
   availability?: string;
   is_craft?: boolean;
 }
+
+// ─── Homebrewing Types ──────────────────────────────────────
+
+export interface HopVariety {
+  id: string;
+  name: string;
+  origin: string;
+  alphaAcid: { min: number; max: number };
+  betaAcid: { min: number; max: number };
+  aromas: string[];
+  characteristics: string[];
+  purpose: 'bittering' | 'aroma' | 'dual-purpose';
+  substitutes: string[];
+  commonStyles: string[];
+}
+
+export interface RecipeIngredient {
+  name: string;
+  amount: string;
+  unit: string;
+  notes?: string;
+}
+
+export interface RecipeHopAddition {
+  name: string;
+  amount: string;
+  unit: string;
+  alphaAcid: number;
+  timing: string; // e.g., '60 min', '15 min', 'Dry hop 5 days'
+  purpose: 'bittering' | 'flavor' | 'aroma' | 'dry hop';
+}
+
+export interface HomebrewRecipe {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  style: string;
+  batchSize: string;
+  og: number;
+  fg: number;
+  abv: number;
+  ibu: number;
+  srm: number;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  method: 'extract' | 'partial-mash' | 'all-grain' | 'biab';
+  grains: RecipeIngredient[];
+  hops: RecipeHopAddition[];
+  yeast: string;
+  otherIngredients?: RecipeIngredient[];
+  steps: string[];
+  tips: string[];
+  tags: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface EquipmentItem {
+  name: string;
+  description: string;
+  tier: 'starter' | 'intermediate' | 'advanced';
+  category: 'brewing' | 'fermentation' | 'bottling' | 'measurement' | 'cleaning' | 'kegging';
+  priceRange: string;
+  essential: boolean;
+}
