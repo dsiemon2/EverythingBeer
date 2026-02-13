@@ -138,7 +138,7 @@ export default function AgeVerificationModal() {
           {/* ─── State: Birthday Entry ─── */}
           {state === 'birthday' && (
             <>
-              <p className="text-dark-muted text-center mb-6">
+              <p className="text-amber-50 font-bold text-center mb-6">
                 You must be 21 years or older to view this site. Please verify your age.
               </p>
 
