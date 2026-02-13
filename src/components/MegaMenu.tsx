@@ -210,7 +210,7 @@ const menuItems: MenuItem[] = [
       {
         title: 'Brewing',
         links: [
-          { href: '/beer-fyi/home-brewing-getting-started', label: 'Home Brewing 101', description: 'Getting started article', icon: <Pen className="w-4 h-4" /> },
+          { href: '/homebrew/getting-started', label: 'Getting Started', description: 'Is homebrewing for you?', icon: <Pen className="w-4 h-4" /> },
           { href: '/homebrew', label: 'All Homebrewing', description: 'Complete section', icon: <Home className="w-4 h-4" /> },
           { href: '/homebrew/recipes', label: 'Recipes', description: 'Step-by-step brew guides', icon: <BookOpen className="w-4 h-4" /> },
         ],

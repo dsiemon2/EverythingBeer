@@ -173,13 +173,13 @@ export default function HomebrewPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { slug: 'home-brewing-getting-started', title: 'Home Brewing 101: Getting Started', description: 'Everything you need to know to brew your first batch at home.' },
-              { slug: 'hops-the-flower-behind-the-flavor', title: 'Hops: The Flower Behind the Flavor', description: 'Discover the hop varieties that make your favorite beers unique.' },
-              { slug: 'the-history-of-beer', title: 'The History of Beer', description: 'From ancient Sumeria to your homebrew — the story of beer.' },
+              { href: '/homebrew/getting-started', title: 'Getting Started with Homebrewing', description: 'Is homebrewing for you? Find out what it takes to start brewing at home.' },
+              { href: '/beer-fyi/hops-the-flower-behind-the-flavor', title: 'Hops: The Flower Behind the Flavor', description: 'Discover the hop varieties that make your favorite beers unique.' },
+              { href: '/beer-fyi/the-history-of-beer', title: 'The History of Beer', description: 'From ancient Sumeria to your homebrew — the story of beer.' },
             ].map((article) => (
               <Link
-                key={article.slug}
-                href={`/beer-fyi/${article.slug}`}
+                key={article.href}
+                href={article.href}
                 className="group bg-dark-surface border border-dark-border rounded-xl p-5 hover:border-amber-500/50 transition-all"
               >
                 <h3 className="font-semibold text-amber-50 group-hover:text-amber-400 transition-colors mb-2">
