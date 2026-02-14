@@ -28,6 +28,7 @@ import {
   Thermometer,
   Hop,
   Wrench,
+  Beaker,
 } from 'lucide-react';
 
 interface MenuSection {
@@ -228,6 +229,9 @@ const menuItems: MenuItem[] = [
           { href: '/homebrew/abv-calculator', label: 'ABV Calculator', description: 'Calculate alcohol content', icon: <Calculator className="w-4 h-4" /> },
           { href: '/homebrew/ibu-calculator', label: 'IBU Calculator', description: 'Estimate hop bitterness', icon: <FlaskConical className="w-4 h-4" /> },
           { href: '/homebrew/hydrometer', label: 'Hydrometer Guide', description: 'Read & correct readings', icon: <Thermometer className="w-4 h-4" /> },
+          { href: '/homebrew/dilution-boiloff', label: 'Dilution & Boil Off', description: 'Water & evaporation calcs', icon: <Droplets className="w-4 h-4" /> },
+          { href: '/homebrew/brix-conversion', label: 'Brix Conversion', description: 'Brix ↔ SG + refractometer', icon: <Beaker className="w-4 h-4" /> },
+          { href: '/homebrew/mash-calculator', label: 'Mash Calculator', description: 'Strike temp & water volumes', icon: <Thermometer className="w-4 h-4" /> },
         ],
       },
     ],

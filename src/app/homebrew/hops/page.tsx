@@ -2,6 +2,7 @@ import { Hop } from 'lucide-react';
 import Link from 'next/link';
 import { getAllHops } from '@/data/hop-varieties';
 import HopTable from '@/components/homebrew/HopTable';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 
 export const metadata = {
   title: 'Hop Chart & Comparison | EverythingBeer',
@@ -37,23 +38,30 @@ export default function HopsPage() {
           </p>
         </div>
 
-        {/* Hop Table */}
-        <HopTable hops={hops} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            {/* Hop Table */}
+            <HopTable hops={hops} />
 
-        {/* Bottom Links */}
-        <div className="mt-12 flex flex-wrap gap-4">
-          <Link
-            href="/homebrew/ibu-calculator"
-            className="bg-dark-surface border border-dark-border rounded-xl px-5 py-3 hover:border-amber-500/50 transition-colors text-sm text-amber-400 font-medium"
-          >
-            Calculate IBU from your hops →
-          </Link>
-          <Link
-            href="/homebrew/recipes"
-            className="bg-dark-surface border border-dark-border rounded-xl px-5 py-3 hover:border-amber-500/50 transition-colors text-sm text-amber-400 font-medium"
-          >
-            Browse Recipes →
-          </Link>
+            {/* Bottom Links */}
+            <div className="mt-12 flex flex-wrap gap-4">
+              <Link
+                href="/homebrew/ibu-calculator"
+                className="bg-dark-surface border border-dark-border rounded-xl px-5 py-3 hover:border-amber-500/50 transition-colors text-sm text-amber-400 font-medium"
+              >
+                Calculate IBU from your hops →
+              </Link>
+              <Link
+                href="/homebrew/recipes"
+                className="bg-dark-surface border border-dark-border rounded-xl px-5 py-3 hover:border-amber-500/50 transition-colors text-sm text-amber-400 font-medium"
+              >
+                Browse Recipes →
+              </Link>
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <HomebrewSidebar />
         </div>
       </div>
     </div>

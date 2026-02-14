@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import { getAllRecipes } from '@/data/homebrew-recipes';
 import RecipeCard from '@/components/homebrew/RecipeCard';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 
 export default function RecipesPage() {
   const allRecipes = getAllRecipes();
@@ -19,7 +20,7 @@ export default function RecipesPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-dark-muted mb-8">
           <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
@@ -43,6 +44,8 @@ export default function RecipesPage() {
           </p>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
         {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-8">
           <select
@@ -84,6 +87,11 @@ export default function RecipesPage() {
             <p className="text-sm">Try changing the difficulty or method filter</p>
           </div>
         )}
+          </div>
+
+          {/* Sidebar */}
+          <HomebrewSidebar />
+        </div>
       </div>
     </div>
   );

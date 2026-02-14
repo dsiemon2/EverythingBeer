@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Wrench, BookOpen, Beer } from 'lucide-react';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 
 export const metadata = {
   title: 'Getting Started with Homebrewing | EverythingBeer',
@@ -10,7 +10,7 @@ export const metadata = {
 export default function GettingStartedPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-dark-muted mb-8">
           <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
@@ -66,46 +66,9 @@ export default function GettingStartedPage() {
               brewers. The benefits of homebrewing speak for themselves&mdash;and if you&apos;ve made
               it this far, you&apos;re probably already sold!
             </p>
-          </article>
 
-          {/* Sidebar — 1/3 width */}
-          <aside className="lg:col-span-1">
-            <div className="sticky top-8">
-              {/* Book Ad */}
-              <div className="bg-dark-surface border border-dark-border rounded-2xl overflow-hidden">
-                <div className="bg-gradient-to-r from-neon-orange to-neon-rust p-5">
-                  <h3 className="text-lg font-bold text-white mb-1">
-                    📖 Recommended Reading
-                  </h3>
-                  <p className="text-sm text-amber-100">
-                    The perfect companion for your homebrewing journey.
-                  </p>
-                </div>
-                <div className="p-6 text-center">
-                  <Image
-                    src="/everythingbeer/images/homebrewing-simplified.png"
-                    alt="Homebrewing Simplified - A Beginner's Guide to Making Your Own Beer by Bryan Siemon"
-                    width={180}
-                    height={252}
-                    className="mx-auto mb-4 rounded-lg shadow-md"
-                  />
-                  <h4 className="font-bold text-amber-50 text-lg mb-1">
-                    Homebrewing Simplified
-                  </h4>
-                  <p className="text-sm text-dark-muted mb-2">
-                    A Beginner&apos;s Guide To Making Your Own Beer!
-                  </p>
-                  <p className="text-xs text-dark-muted">
-                    By Bryan Siemon
-                  </p>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        {/* Next Steps */}
-        <div className="mt-12 space-y-4">
+            {/* Next Steps */}
+            <div className="mt-8 space-y-4">
           <h2 className="text-xl font-bold text-amber-50">Ready to Get Started?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Link
@@ -147,7 +110,12 @@ export default function GettingStartedPage() {
                 Read guide <ArrowRight className="w-3 h-3" />
               </span>
             </Link>
-          </div>
+            </div>
+            </div>
+          </article>
+
+          {/* Sidebar — 1/3 width */}
+          <HomebrewSidebar />
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { use } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Gauge, Droplets, Beer, BookOpen, Lightbulb } from 'lucide-react';
 import { getRecipeBySlug, getAllRecipes } from '@/data/homebrew-recipes';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 
 // SRM to hex color
 function srmToHex(srm: number): string {
@@ -63,7 +64,7 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-dark-muted mb-8">
           <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
@@ -120,6 +121,8 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
           </div>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
         {/* Ingredients */}
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-amber-50 mb-6 flex items-center gap-2">
@@ -267,6 +270,11 @@ export default function RecipeDetailPage({ params }: RecipeDetailPageProps) {
         >
           <ArrowLeft className="w-4 h-4" /> Back to All Recipes
         </Link>
+          </div>
+
+          {/* Sidebar */}
+          <HomebrewSidebar />
+        </div>
       </div>
     </div>
   );

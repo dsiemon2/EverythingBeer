@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Wrench, ArrowRight } from 'lucide-react';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 import { getEquipmentByTier, tierSummaries } from '@/data/homebrew-equipment';
 import EquipmentTierSection from '@/components/homebrew/EquipmentTierSection';
 
@@ -11,7 +12,7 @@ export const metadata = {
 export default function EquipmentPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-dark-muted mb-8">
           <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
@@ -35,6 +36,8 @@ export default function EquipmentPage() {
           </p>
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
         {/* Tier Sections */}
         <div className="space-y-4 mb-12">
           {tierSummaries.map((summary) => (
@@ -81,6 +84,11 @@ export default function EquipmentPage() {
           >
             Learn to Use Your Hydrometer →
           </Link>
+        </div>
+          </div>
+
+          {/* Sidebar */}
+          <HomebrewSidebar />
         </div>
       </div>
     </div>

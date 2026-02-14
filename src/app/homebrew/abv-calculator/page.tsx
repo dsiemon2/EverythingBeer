@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Calculator, Info } from 'lucide-react';
+import HomebrewSidebar from '@/components/homebrew/HomebrewSidebar';
 
 // Common style ABV ranges for reference
 const styleRanges = [
@@ -51,7 +52,7 @@ export default function ABVCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-dark-muted mb-8">
           <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
@@ -75,7 +76,9 @@ export default function ABVCalculatorPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content — 2/3 */}
+          <div className="lg:col-span-2 space-y-6">
           {/* Calculator */}
           <div className="bg-dark-surface border border-dark-border rounded-2xl p-6">
             <h2 className="text-lg font-bold text-amber-50 mb-6">Enter Your Readings</h2>
@@ -169,7 +172,7 @@ export default function ABVCalculatorPage() {
           </div>
 
           {/* Reference Table */}
-          <div>
+          <div className="space-y-6">
             <div className="bg-dark-surface border border-dark-border rounded-2xl p-6 mb-6">
               <h2 className="text-lg font-bold text-amber-50 mb-4">ABV by Beer Style</h2>
               <div className="space-y-2">
@@ -204,6 +207,10 @@ export default function ABVCalculatorPage() {
               </div>
             </div>
           </div>
+          </div>
+
+          {/* Sidebar */}
+          <HomebrewSidebar />
         </div>
       </div>
     </div>
