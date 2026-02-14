@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SessionProvider from "@/components/SessionProvider";
+import AgeVerificationModal from "@/components/AgeVerificationModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ export default function RootLayout({
       >
         <SessionProvider>
           <Header />
+          <AgeVerificationModal />
           <main className="flex-grow">
             {children}
           </main>
