@@ -112,6 +112,42 @@ src/
 | `NODE_ENV` | Environment mode | `development` |
 | `PORT` | Server port | `3000` |
 
+## OpenSentinel Integration
+
+EverythingBeer integrates with [OpenSentinel](https://opensentinel.ai) for AI-powered assistant capabilities including beer recommendations, natural language search, and smart notifications.
+
+### Setup
+
+1. Set environment variables in `.env`:
+   ```env
+   OPENSENTINEL_ENABLED=true
+   OPENSENTINEL_URL=http://localhost:8030
+   OPENSENTINEL_API_KEY=your-api-key
+   ```
+
+2. The service is available at `src/lib/opensentinel.ts`:
+   ```typescript
+   import { openSentinelService } from '@/lib/opensentinel';
+
+   // Register with OpenSentinel
+   await openSentinelService.register();
+
+   // AI-powered beer chat
+   const response = await openSentinelService.chat('Recommend a hoppy IPA');
+
+   // Send notifications
+   await openSentinelService.notify('telegram', 'New beer added to database');
+
+   // Store beer discovery memories
+   await openSentinelService.storeMemory('User prefers craft IPAs from Pacific Northwest');
+   ```
+
+### Features
+- AI-powered beer recommendations and search
+- Cross-platform notifications (Telegram, Discord, Slack)
+- Memory system for personalized beer suggestions
+- Smart home integration for beer-related automations
+
 ## Contributing
 
 1. Fork the repository
